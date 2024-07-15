@@ -15,8 +15,8 @@ section{
     width: 100%;
 }
 .row{
-    margin-left:-15px;
-    margin-right:-15px;
+    margin-left:auto;
+    margin-right:auto;
 }
 #digital_transfers_btn{
     background: #fff url(/images/digitalprint.png) no-repeat;
@@ -29,4 +29,7 @@ section{
     background-size: cover;
     height: 170px;
     width: 220px;
+}
+.filter-btn{
+    background-color: #ddd;
 }
