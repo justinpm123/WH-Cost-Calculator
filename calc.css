@@ -7,7 +7,12 @@ h2 {
 }
 .container {
     background-color: #fff;
+    margin: auto;
     max-width: 1000px;
+    text-align: center;
+}
+section{
+    width: 100%;
 }
 #digital_transfers_btn{
     background: #fff url(/images/digitalprint.png) no-repeat;
