@@ -10,8 +10,14 @@ h2 {
     max-width: 1000px;
 }
 #digital_transfers_btn{
-    background-image: url(/images/digitalprint.png);
+    background: #fff url(/images/digitalprint.png) no-repeat;
+    background-size: cover;
+    height: 170px;
+    width: 220px;
 }
 #cadcut_transfers_btn{
-    background-image: url(/images/cadcut.png);
+    background:#fff url(/images/cadcut.png) no-repeat;
+    background-size: cover;
+    height: 170px;
+    width: 220px;
 }
