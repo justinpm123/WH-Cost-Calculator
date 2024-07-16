@@ -68,5 +68,6 @@ section{
     border:2px solid #aaa;
     border-radius: 5px;
     background-color: #fff;
+    display: none;
     min-width:250px;
 }
