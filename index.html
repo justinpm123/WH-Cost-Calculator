@@ -11,7 +11,7 @@
     <div class="container">
         <h1 class="m-2">Wellington House Quick Price Calculator</h1>
         <section class="col my-4" id="service_type">
-            <h2 class="m-2 py-2 w-100">Service Type</h2>
+            <h2 class="m-2 py-2 w-100">1. Service Type</h2>
             <div class="row justify-content-around">
                 <button id="digital_transfers_btn" name="Digital Transfers"></button>
                 <button id="cadcut_transfers_btn" name="Custom Cad-Cut"></button>
@@ -19,7 +19,7 @@
         </section>
         <section class="col my-4 hide" id="digital_transfers_sec">
             <div class="row my-4 filter-btns">
-                <h2 class="m-2 py-2 w-100">Digital Transfer Product</h2>
+                <h2 class="m-2 py-2 w-100">2. Digital Transfer Product</h2>
                 <h3 class="w-100">Filter by Material Compatibility</h3>
                 <button class="filter-btn p-2 flex-grow-1" onclick="filterSelection('all')">All</button>
                 <button class="filter-btn p-2 flex-grow-1" onclick="filterSelection('cotton')">Best For Cotton</button>
@@ -50,6 +50,22 @@
                 <button class="digi-btn p-2 cotton poly-cotton poly">SparklePrint™</button>
                 <button class="digi-btn p-2 cotton poly-cotton poly lycra">CAD-COLOR® Soft Opaque II</button>
                 <button class="digi-btn p-2 cotton poly-cotton poly">CAD-COLOR® Chroma-Twill</button>
+            </div>
+            <div class="digi-dimensions gap-1 row w-75 m-auto">
+                <h2 class="m-2 py-2 w-100">3. Design Dimensions</h2>
+                <div class="card col-4">
+                    <div class="card-body">
+                        <p>In Inches</p>
+                        <label for="width">
+                            Width
+                        </label>
+                        <input class="form-control" id="width" name="Width" type="number">
+                        <label for="height">
+                            Height
+                        </label>
+                        <input class="form-control" id="height" name="Height" type="number">
+                    </div>
+                </div>
             </div>
         </section>
         <section class="col my-4 hide" id="cadcut_transfers_sec">
