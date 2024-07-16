@@ -18,6 +18,21 @@ section{
     margin-left:auto;
     margin-right:auto;
 }
+.gap-1{
+    gap:0.25rem;
+}
+.gap-2{
+    gap:0.5rem;
+}
+.gap-3{
+    gap:0.75rem;
+}
+.gap-4{
+    gap:1rem;
+}
+#digital_transfers_sec h3{
+    font-size: 1.5rem;
+}
 #digital_transfers_btn{
     background: #fff url(/images/digitalprint.png) no-repeat;
     background-size: cover;
@@ -32,4 +47,21 @@ section{
 }
 .filter-btn{
     background-color: #ddd;
+    border: none;
+    font-size: 0.8rem;
+    margin:auto 2px;
+    transition: 0.15s ease-in-out;
+}
+.filter-btn:hover,.filter-btn:active,.filter-btn:focus,.filter-btn:focus-within,.filter-btn.active{
+    background-color: #aaa;
+}
+.digi-btn:hover,.digi-btn:active,.digi-btn:focus,.digi-btn:focus-within, .digi-btn.active{
+    background-color: #ddd;
+}
+.digi-btn{
+    border:2px solid #aaa;
+    border-radius: 5px;
+    background-color: #fff;
+    min-width:250px;
+
 }
