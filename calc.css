@@ -30,6 +30,12 @@ section{
 .gap-4{
     gap:1rem;
 }
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
 #digital_transfers_sec h3{
     font-size: 1.5rem;
 }
