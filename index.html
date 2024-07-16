@@ -1,39 +1,63 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="calc.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class="container">
-            <h1 class="m-2">Wellington House Quick Price Calculator</h1>
-            <section class="col my-4" id="service_type">
-                <h2 class="m-2">Service Type</h2>
-                <div class="row justify-content-around">
-                    <button id="digital_transfers_btn" name="Digital Transfers"></button>
-                    <button id="cadcut_transfers_btn" name="Custom Cad-Cut"></button>
-                </div>
-            </section>
-            <section class="col my-4" id="digital_transfers_sec">
-                <div class="row justify-content-around">
-                    <h2 class="w-100">Digital Transfer Product</h2>
-                    <h3 class="w-100">Filter by Material Compatibility</h3>
-                    <button class="filter-btn p-2">All</button>
-                    <button class="filter-btn p-2">Best For Cotton</button>
-                    <button class="filter-btn p-2">Best For Polyester</button>
-                    <button class="filter-btn p-2">Best For Poly / Cotton Blend</button>
-                    <button class="filter-btn p-2">Sublimated Polyester</button>
-                    <button class="filter-btn p-2">Lycra / Spandex</button>
-                    <button class="filter-btn p-2">Nylon</button>
-                    <button class="filter-btn p-2">Polypropylene</button>
-                    <button class="filter-btn p-2">Leather</button>
-                </div>
-            </section>
-            <section class="col my-4" id="cadcut_transfers_sec">
 
-            </section>
-        </div>
-        <script src="calc.js"></script>
-    </body>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="calc.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="m-2">Wellington House Quick Price Calculator</h1>
+        <section class="col my-4" id="service_type">
+            <h2 class="m-2 py-2 w-100">Service Type</h2>
+            <div class="row justify-content-around">
+                <button id="digital_transfers_btn" name="Digital Transfers"></button>
+                <button id="cadcut_transfers_btn" name="Custom Cad-Cut"></button>
+            </div>
+        </section>
+        <section class="col my-4" id="digital_transfers_sec">
+            <div class="row justify-content-around">
+                <h2 class="m-2 py-2 w-100">Digital Transfer Product</h2>
+                <h3 class="w-100">Filter by Material Compatibility</h3>
+                <button class="filter-btn p-2">All</button>
+                <button class="filter-btn p-2">Best For Cotton</button>
+                <button class="filter-btn p-2">Best For Polyester</button>
+                <button class="filter-btn p-2">Best For Poly / Cotton Blend</button>
+                <button class="filter-btn p-2">Sublimated Polyester</button>
+                <button class="filter-btn p-2">Lycra / Spandex</button>
+                <button class="filter-btn p-2">Nylon</button>
+                <button class="filter-btn p-2">Polypropylene</button>
+                <button class="filter-btn p-2">Leather</button>
+            </div>
+            <div class="row justify-content-around">
+                <button class="p-2 cotton poly-cotton poly">ColorPrint™ Easy</button>
+                <button class="p-2 cotton poly-cotton poly">Express Print©</button>
+                <button class="p-2 ">SuperTEK© Opaque</button>
+                <button class="p-2 cotton poly-cotton poly">ColorPrint Soft Opaque</button>
+                <button class="p-2 cotton poly-cotton poly">HI-5 Print Matte</button>
+                <button class="p-2 poly">Sublithin® Soft</button>
+                <button class="p-2 poly">SuperTEK© Sublitstop</button>
+                <button class="p-2 cotton poly-cotton poly">ColorPrint™ PU Matte</button>
+                <button class="p-2 cotton poly-cotton poly">ColorPrint™ PU Gloss</button>
+                <button class="p-2 cotton poly-cotton poly">SuperTEK© Clear Gloss</button>
+                <button class="p-2 cotton poly-cotton poly">SuperTEK© Clear Matte</button>
+                <button class="p-2 cotton poly-cotton poly">S-Print™</button>
+                <button class="p-2">Eco-Sol Flock</button>
+                <button class="p-2 cotton poly-cotton poly">Soft Foam</button>
+                <button class="p-2 cotton poly-cotton poly">DigiBrick™</button>
+                <button class="p-2 cotton poly-cotton poly">SparklePrint™</button>
+                <button class="p-2 cotton poly-cotton poly">CAD-COLOR® Soft Opaque II</button>
+                <button class="p-2 cotton poly-cotton poly">CAD-COLOR® Chroma-Twill</button>
+            </div>
+        </section>
+        <section class="col my-4" id="cadcut_transfers_sec">
+
+        </section>
+    </div>
+    <script src="calc.js"></script>
+</body>
+
 </html>
