@@ -105,19 +105,18 @@ const heightInput = document.querySelector('#height');
 const squareInchSizeElement = document.querySelector('#square_inch_size');
 
 function calculateAndDisplaySize() {
-  let width = parseFloat(widthInput.squareInchResult);
-  let height = parseFloat(heightInput.squareInchResult);
-  console.log(width)
-  console.log(height)
+  let width = widthInput.value;
+  let height = heightInput.value;
+
   // Multiply the width and height
-  let squareInchResult = width * height;
-  console.log(squareInchResult)
-  // Round the result to the nearest hundredth
-  squareInchResult = Math.round(squareInchResult * 100) / 100;
-  console.log(squareInchResult)
+  let value = width * height;
+
+  // Convert the result to a float and round to the nearest hundredth
+  value = parseFloat(Math.round(value * 100) / 100).toFixed(2);
+
   // Update the squareInchSizeElement with the rounded number string
-  squareInchSizeElement.textContent = squareInchResult.toFixed(2);
+  squareInchSizeElement.textContent = value;
 }
-console.log(squareInchSizeElement)
+
 widthInput.addEventListener('change', calculateAndDisplaySize);
 heightInput.addEventListener('change', calculateAndDisplaySize);
