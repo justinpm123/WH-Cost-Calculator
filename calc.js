@@ -107,16 +107,17 @@ const squareInchSizeElement = document.querySelector('#square_inch_size');
 function calculateAndDisplaySize() {
   let width = parseFloat(widthInput.squareInchResult);
   let height = parseFloat(heightInput.squareInchResult);
-
+  console.log(width)
+  console.log(height)
   // Multiply the width and height
   let squareInchResult = width * height;
-
+  console.log(squareInchResult)
   // Round the result to the nearest hundredth
   squareInchResult = Math.round(squareInchResult * 100) / 100;
-
+  console.log(squareInchResult)
   // Update the squareInchSizeElement with the rounded number string
   squareInchSizeElement.textContent = squareInchResult.toFixed(2);
 }
-
+console.log(squareInchSizeElement)
 widthInput.addEventListener('change', calculateAndDisplaySize);
 heightInput.addEventListener('change', calculateAndDisplaySize);
