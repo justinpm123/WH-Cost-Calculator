@@ -31,10 +31,10 @@ section{
     gap:1rem;
 }
 .hide{
-    display: none;
+    display: none !important;
 }
 .show{
-    display: block;
+    display: block !important;
 }
 #digital_transfers_sec h3{
     font-size: 1.5rem;
