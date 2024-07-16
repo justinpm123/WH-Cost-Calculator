@@ -99,14 +99,24 @@ function w3RemoveClass(element, name) {
   }
   element.className = arr1.join(" ");
 }
+// width x height calc display
+const widthInput = document.querySelector('#width');
+const heightInput = document.querySelector('#height');
+const squareInchSizeElement = document.querySelector('#square_inch_size');
 
-// Add active class to the current control button (highlight it)
-// var btnContainer = document.getElementsByClassName("filter-btns");
-// var btns = btnContainer.getElementsByClassName("filter-btn");
-// for (var i = 0; i < btns.length; i++) {
-//   btns[i].addEventListener("click", function() {
-//     var current = document.getElementsByClassName("active");
-//     current[0].className = current[0].className.replace(" active", "");
-//     this.className += " active";
-//   });
-// }
+function calculateAndDisplaySize() {
+  let width = parseFloat(widthInput.squareInchResult);
+  let height = parseFloat(heightInput.squareInchResult);
+
+  // Multiply the width and height
+  let squareInchResult = width * height;
+
+  // Round the result to the nearest hundredth
+  squareInchResult = Math.round(squareInchResult * 100) / 100;
+
+  // Update the squareInchSizeElement with the rounded number string
+  squareInchSizeElement.textContent = squareInchResult.toFixed(2);
+}
+
+widthInput.addEventListener('change', calculateAndDisplaySize);
+heightInput.addEventListener('change', calculateAndDisplaySize);

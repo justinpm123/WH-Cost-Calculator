@@ -71,3 +71,9 @@ section{
     display: none;
     min-width:250px;
 }
+.digi-dimensions{
+    display:none;
+}
+.digi-dimensions label{
+    margin:auto 5px;
+}
