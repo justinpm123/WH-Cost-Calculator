@@ -144,6 +144,7 @@ async function fetchPriceList() {
 const quantityInput = document.querySelector("#quantityInput");
 const totalPriceOutput = document.querySelector("#totalPriceOutput");
 let quantity; // Declare quantity as a global variable
+let quantityRanges; // Declare quantityRanges as a global variable
 
 // Modify the calculateSize function
 async function calculateSize() {
