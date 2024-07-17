@@ -80,3 +80,6 @@ section{
 #width, #height{
     max-width:100px
 }
+.digi-cost .text-right>p {
+    font-weight: bold;
+}
