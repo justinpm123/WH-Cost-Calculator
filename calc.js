@@ -180,7 +180,7 @@ const squareInchRange = squareInchRanges.find(range => value <= parseInt(range))
       const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
       const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
       console.log(`Total Price for ${quantityRange}: ${dollarTotalPrice}`);
-      document.querySelector(`#q${quantityRange}_piece_price`).innerText = dollarTotalPrice;
+      document.querySelector(`#q${quantityRange}_piece_price`).innerText = dollarTotalPrice + " " + "each";
   });
 }
 
