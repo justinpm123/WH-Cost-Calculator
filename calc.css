@@ -77,3 +77,6 @@ section{
 .digi-dimensions label{
     margin:auto 15px;
 }
+#width, #height{
+    max-width:100px
+}
