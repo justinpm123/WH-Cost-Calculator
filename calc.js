@@ -112,7 +112,7 @@ function calculateAndDisplaySize() {
   let value = width * height;
 
   // Convert the result to a float and round to the nearest hundredth
-  value = parseFloat(Math.round(value * 100) / 100).toFixed(2);
+  value = Math.round(value);
 
   // Update the squareInchSizeElement with the rounded number string
   squareInchSizeElement.textContent = value;
