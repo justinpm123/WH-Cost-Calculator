@@ -143,10 +143,11 @@ async function calculateSize() {
 
   // Multiply the width and height
   let value = width * height;
+  console.log(value)
 
   // Convert the result to a float and round to the nearest hundredth
   value = Math.round(value);
-
+  console.log(value)
   // Fetch the price list
   const priceList = await fetchPriceList();
 
