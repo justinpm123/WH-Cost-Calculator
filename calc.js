@@ -166,7 +166,7 @@ async function calculateSize() {
       const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
       const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
       console.log(`Total Price for ${quantityRange}: ${dollarTotalPrice}`);
-      document.querySelector(`#${quantityRange}_piece_price`).innerText = dollarTotalPrice;
+      document.querySelector(`${quantityRange}_piece_price`).innerText = dollarTotalPrice;
   });
 }
 
