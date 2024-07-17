@@ -114,8 +114,6 @@ function calculateAndDisplaySize() {
   // Convert the result to a float and round to the nearest hundredth
   value = Math.round(value);
 
-  // Update the squareInchSizeElement with the rounded number string
-  squareInchSizeElement.textContent = value;
 }
 
 widthInput.addEventListener('change', calculateAndDisplaySize);
