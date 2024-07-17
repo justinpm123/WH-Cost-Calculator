@@ -2,6 +2,7 @@
 const digitalTransfersButton = document.querySelector("#digital_transfers_btn");
 const cadcutTransfersButton = document.querySelector("#cadcut_transfers_btn");
 const calcSubmitButton = document.querySelector("#calcSubmit");
+const calcQtyButton = document.querySelector("#calcQtySubmit");
 
 // Get the sections
 const digitalTransfersSection = document.querySelector(
@@ -140,6 +141,10 @@ async function fetchPriceList() {
   return await response.json();
 }
 
+const quantityInput = document.querySelector("#quantityInput");
+const totalPriceOutput = document.querySelector("#totalPriceOutput");
+let quantity; // Declare quantity as a global variable
+
 // Modify the calculateSize function
 async function calculateSize() {
   console.log("Calculating Size");
@@ -187,6 +192,23 @@ async function calculateSize() {
     document.querySelector(`#q${quantityRange}_piece_price`).innerText =
       dollarTotalPrice + " " + "each";
   });
+  quantity = quantityInput.value; // Assign value to quantity
+}
+calcSubmitButton.addEventListener("click", calculateSize);
+
+function calculateTotalPrice() {
+  Object.entries(quantityRanges).forEach(([quantityRange, price]) => {
+    const [minQuantity, maxQuantity] = quantityRange.split("-").map(Number);
+    if (quantity >= minQuantity && quantity <= maxQuantity) {
+      const totalPrice = quantity * parseFloat(price);
+      const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
+      const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
+      totalPriceOutput.innerText = dollarTotalPrice;
+    }
+  });
 }
 
-calcSubmitButton.addEventListener("click", calculateSize);
+calcQtyButton.addEventListener('click', () => {
+  calculateSize();
+  calculateTotalPrice();
+});
