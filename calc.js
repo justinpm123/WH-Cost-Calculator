@@ -57,8 +57,6 @@ filterButtons.forEach((button) => {
     // Add "active" class to the clicked filter button
     button.classList.add("active");
 
-    // Call calculateSize function when activeButton changes
-    calculateSize();
   });
 });
 
@@ -81,8 +79,6 @@ digiButtons.forEach((button) => {
     // Add the 'show' class to the div
     digiDimensions.classList.add("show");
 
-    // Call calculateSize function when activeButton changes
-    calculateSize();
   });
 });
 
