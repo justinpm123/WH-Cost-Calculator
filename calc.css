@@ -83,6 +83,12 @@ section{
 .digi-dimensions{
     display:none;
 }
+#calcSubmit {
+    border-radius: 3px;
+    height: 2.5rem;
+    margin-left: 1rem;
+    min-width: 125px;
+}
 .digi-dimensions label{
     margin:auto 15px;
 }
