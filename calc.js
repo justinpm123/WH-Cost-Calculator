@@ -107,12 +107,18 @@ document.querySelector('.digi-btn').addEventListener('click', function() {
   // Add the 'show' class to the div
   digiDimensions.classList.add('show');
 });
-// Width x height calc display
+// Width x height x $
 const widthInput = document.querySelector('#width');
 const heightInput = document.querySelector('#height');
-const squareInchSizeElement = document.querySelector('#square_inch_size');
 
-function calculateSize() {
+// Fetch the price list
+async function fetchPriceList() {
+  const response = await fetch('/price_list.json');
+  return await response.json();
+}
+
+// Modify the calculateSize function
+async function calculateSize() {
   let width = widthInput.value;
   let height = heightInput.value;
 
@@ -121,6 +127,31 @@ function calculateSize() {
 
   // Convert the result to a float and round to the nearest hundredth
   value = Math.round(value);
+
+  // Fetch the price list
+  const priceList = await fetchPriceList();
+
+  // Get the active button
+  const activeButton = document.querySelector('.active.digi-btn');
+
+  // Get the material class
+  const materialClass = ['standard', 'specialty', 'premium'].find(cls => activeButton.classList.contains(cls));
+
+  // Get the material from the price list
+  const material = priceList[materialClass];
+
+  // Find the square inch range
+  const squareInchRange = Object.keys(material).find(range => value >= parseInt(range.split('+')[0]));
+
+  // Get the quantity ranges
+  const quantityRanges = material[squareInchRange];
+
+  // Calculate and log the prices
+  Object.entries(quantityRanges).forEach(([quantityRange, price]) => {
+      const totalPrice = value * price;
+      console.log(`For a quantity of ${quantityRange}, the total price would be ${totalPrice}`);
+  });
 }
+
 widthInput.addEventListener('change', calculateSize);
 heightInput.addEventListener('change', calculateSize);
