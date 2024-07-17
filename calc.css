@@ -5,6 +5,9 @@ h2 {
     background-color: #337ab7;
     color: #fff;
 }
+p {
+    margin:1rem 0;
+}
 .container {
     background-color: #fff;
     margin: auto;
