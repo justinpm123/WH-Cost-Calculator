@@ -99,12 +99,20 @@ function w3RemoveClass(element, name) {
   }
   element.className = arr1.join(" ");
 }
-// width x height calc display
+// Add an event listener to the digi-btn
+document.querySelector('.digi-btn').addEventListener('click', function() {
+  // Get the div element with the class 'digi-dimensions'
+  const digiDimensions = document.querySelector('.digi-dimensions');
+  
+  // Add the 'show' class to the div
+  digiDimensions.classList.add('show');
+});
+// Width x height calc display
 const widthInput = document.querySelector('#width');
 const heightInput = document.querySelector('#height');
 const squareInchSizeElement = document.querySelector('#square_inch_size');
 
-function calculateAndDisplaySize() {
+function calculateSize() {
   let width = widthInput.value;
   let height = heightInput.value;
 
@@ -113,8 +121,6 @@ function calculateAndDisplaySize() {
 
   // Convert the result to a float and round to the nearest hundredth
   value = Math.round(value);
-
 }
-
-widthInput.addEventListener('change', calculateAndDisplaySize);
-heightInput.addEventListener('change', calculateAndDisplaySize);
+widthInput.addEventListener('change', calculateSize);
+heightInput.addEventListener('change', calculateSize);
