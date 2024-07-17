@@ -148,7 +148,7 @@ async function calculateSize() {
 
   // Calculate and log the prices
   Object.entries(quantityRanges).forEach(([quantityRange, price]) => {
-      const totalPrice = value * price;
+      const totalPrice = value * parseFloat(price);
       console.log(`For a quantity of ${quantityRange}, the total price would be ${totalPrice}`);
   });
 }
