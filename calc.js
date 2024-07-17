@@ -209,7 +209,7 @@ function calculateTotalPrice() {
   });
 }
 
-calcQtyButton.addEventListener('click', () => {
-  calculateSize();
+calcQtyButton.addEventListener('click', async () => {
+  await calculateSize();
   calculateTotalPrice();
 });
