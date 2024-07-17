@@ -141,7 +141,8 @@ async function calculateSize() {
   const material = priceList[materialClass];
 
   // Find the square inch range
-  const squareInchRange = Object.keys(material).find(range => value >= parseInt(range.split('+')[0]));
+  const squareInchRanges = Object.keys(material).sort((a, b) => parseInt(a.split('+')[0]) - parseInt(b.split('+')[0]));
+  const squareInchRange = squareInchRanges.find(range => value <= parseInt(range.split('+')[0])) || squareInchRanges[squareInchRanges.length - 1];
 
   // Get the quantity ranges
   const quantityRanges = material[squareInchRange];
