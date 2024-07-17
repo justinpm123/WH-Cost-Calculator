@@ -114,14 +114,19 @@ function w3RemoveClass(element, name) {
   element.className = arr1.join(" ");
 }
 
-// Add an event listener to the digi-btn
-document.querySelector('.digi-btn').addEventListener('click', function() {
-  console.log('Digi-btn Clicked');
-  // Get the div element with the class 'digi-dimensions'
-  const digiDimensions = document.querySelector('.digi-dimensions');
-  
-  // Add the 'show' class to the div
-  digiDimensions.classList.add('show');
+// Get all buttons with class .digi-btn
+const digiButtons = document.querySelectorAll('.digi-btn');
+
+// Add an event listener to each .digi-btn
+digiButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        console.log('Digi-btn Clicked');
+        // Get the div element with the class 'digi-dimensions'
+        const digiDimensions = document.querySelector('.digi-dimensions');
+        
+        // Add the 'show' class to the div
+        digiDimensions.classList.add('show');
+    });
 });
 
 // Width x height x $
