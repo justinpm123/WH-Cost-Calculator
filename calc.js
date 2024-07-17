@@ -53,6 +53,9 @@ filterButtons.forEach(button => {
         });
         // Add "active" class to the clicked filter button
         button.classList.add('active');
+
+        // Call calculateSize function when activeButton changes
+        calculateSize();
     });
 });
 
@@ -68,6 +71,9 @@ digiButtons.forEach(button => {
         });
         // Add "active" class to the clicked digi button
         button.classList.add('active');
+
+        // Call calculateSize function when activeButton changes
+        calculateSize();
     });
 });
 
@@ -153,9 +159,9 @@ async function calculateSize() {
   // Get the material from the price list
   const material = priceList[materialClass];
 
-  // Find the square inch range
-  const squareInchRanges = Object.keys(material).sort((a, b) => parseInt(a.split('+')[0]) - parseInt(b.split('+')[0]));
-  const squareInchRange = squareInchRanges.find(range => value <= parseInt(range.split('+')[0])) || squareInchRanges[squareInchRanges.length - 1];
+ // Find the square inch range
+const squareInchRanges = Object.keys(material).sort((a, b) => parseInt(a) - parseInt(b));
+const squareInchRange = squareInchRanges.find(range => value <= parseInt(range)) || squareInchRanges[squareInchRanges.length - 1];
 
   // Get the quantity ranges
   const quantityRanges = material[squareInchRange];
@@ -166,7 +172,7 @@ async function calculateSize() {
       const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
       const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
       console.log(`Total Price for ${quantityRange}: ${dollarTotalPrice}`);
-      document.querySelector(`${quantityRange}_piece_price`).innerText = dollarTotalPrice;
+      document.querySelector(`#${quantityRange}_piece_price`).innerText = dollarTotalPrice;
   });
 }
 
