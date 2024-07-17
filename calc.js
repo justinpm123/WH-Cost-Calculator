@@ -3,6 +3,12 @@ const digitalTransfersButton = document.querySelector("#digital_transfers_btn");
 const cadcutTransfersButton = document.querySelector("#cadcut_transfers_btn");
 const calcSubmitButton = document.querySelector("#calcSubmit");
 const calcQtyButton = document.querySelector("#calcQtySubmit");
+// Declare the constant variables to store the values
+let priceValue1;
+let priceValue25;
+let priceValue75;
+let priceValue250;
+let priceValue500;
 
 // Get the sections
 const digitalTransfersSection = document.querySelector(
@@ -159,6 +165,7 @@ async function calculateSize() {
   // Convert the result to a float and round to the nearest hundredth
   value = Math.round(value);
   console.log(value);
+  
   // Fetch the price list
   const priceList = await fetchPriceList();
 
@@ -166,7 +173,7 @@ async function calculateSize() {
   const activeButton = document.querySelector(".active.digi-btn");
 
   // Get the material class
-  const materialClass = ["standard", "specialty", "premium"].find((cls) =>
+  const materialClass = ["standard", "specialty", "premium"].find(cls =>
     activeButton.classList.contains(cls)
   );
 
@@ -178,38 +185,77 @@ async function calculateSize() {
     (a, b) => parseInt(a) - parseInt(b)
   );
   const squareInchRange =
-    squareInchRanges.find((range) => value <= parseInt(range)) ||
+    squareInchRanges.find(range => value <= parseInt(range)) ||
     squareInchRanges[squareInchRanges.length - 1];
 
   // Get the quantity ranges
   const quantityRanges = material[squareInchRange];
 
   // Calculate and log the prices
-  Object.entries(quantityRanges).forEach(([quantityRange, price]) => {
+  Object.entries(quantityRanges).forEach(([quantityRange, price], index) => {
     const totalPrice = value * parseFloat(price);
     const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
     const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
     console.log(`Total Price for ${quantityRange}: ${dollarTotalPrice}`);
     document.querySelector(`#q${quantityRange}_piece_price`).innerText =
       dollarTotalPrice + " " + "each";
+
+    // Store the price values in the constant variables
+    switch (index) {
+      case 0:
+        priceValue1 = dollarTotalPrice;
+        break;
+      case 1:
+        priceValue25 = dollarTotalPrice;
+        break;
+      case 2:
+        priceValue75 = dollarTotalPrice;
+        break;
+      case 3:
+        priceValue250 = dollarTotalPrice;
+        break;
+      case 4:
+        priceValue500 = dollarTotalPrice;
+        break;
+    }
   });
+
   quantity = quantityInput.value; // Assign value to quantity
 }
+
 calcSubmitButton.addEventListener("click", calculateSize);
 
 function calculateTotalPrice() {
-  Object.entries(quantityRanges).forEach(([quantityRange, price]) => {
-    const [minQuantity, maxQuantity] = quantityRange.split("-").map(Number);
-    if (quantity >= minQuantity && quantity <= maxQuantity) {
-      const totalPrice = quantity * parseFloat(price);
-      const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
-      const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
-      totalPriceOutput.innerText = dollarTotalPrice;
-    }
-  });
+  // Get the quantity from the input
+  let quantity = document.querySelector("#quantityInput").value;
+
+  // Convert the price values from strings to numbers
+  let price1 = parseFloat(priceValue1.replace("$", ""));
+  let price25 = parseFloat(priceValue25.replace("$", ""));
+  let price75 = parseFloat(priceValue75.replace("$", ""));
+  let price250 = parseFloat(priceValue250.replace("$", ""));
+  let price500 = parseFloat(priceValue500.replace("$", ""));
+
+  // Calculate the total price based on the quantity
+  let totalPrice;
+  if (quantity <= 24) {
+    totalPrice = quantity * price1;
+  } else if (quantity <= 74) {
+    totalPrice = quantity * price25;
+  } else if (quantity <= 249) {
+    totalPrice = quantity * price75;
+  } else if (quantity <= 499) {
+    totalPrice = quantity * price250;
+  } else {
+    totalPrice = quantity * price500;
+  }
+
+  // Log the total price
+  console.log(`Total Price: $${totalPrice.toFixed(2)}`);
 }
 
-calcQtyButton.addEventListener('click', async () => {
+// Add the event listener for the calcQtyButton
+calcQtyButton.addEventListener("click", async () => {
   await calculateSize();
   calculateTotalPrice();
 });
