@@ -59,7 +59,7 @@ filterButtons.forEach(button => {
     });
 });
 
-// Add click event listener for .digi-btn
+// Add click event listener for each .digi-btn
 digiButtons.forEach(button => {
     button.addEventListener('click', () => {
         console.log('Digi Button Clicked');
@@ -72,10 +72,17 @@ digiButtons.forEach(button => {
         // Add "active" class to the clicked digi button
         button.classList.add('active');
 
+        // Get the div element with the class 'digi-dimensions'
+        const digiDimensions = document.querySelector('.digi-dimensions');
+  
+        // Add the 'show' class to the div
+        digiDimensions.classList.add('show');
+
         // Call calculateSize function when activeButton changes
         calculateSize();
     });
 });
+
 
 filterSelection("all")
 function filterSelection(c) {
@@ -114,19 +121,14 @@ function w3RemoveClass(element, name) {
   element.className = arr1.join(" ");
 }
 
-// Get all buttons with class .digi-btn
-const digiButtons = document.querySelectorAll('.digi-btn');
-
-// Add an event listener to each .digi-btn
-digiButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        console.log('Digi-btn Clicked');
-        // Get the div element with the class 'digi-dimensions'
-        const digiDimensions = document.querySelector('.digi-dimensions');
-        
-        // Add the 'show' class to the div
-        digiDimensions.classList.add('show');
-    });
+// Add an event listener to the digi-btn
+document.querySelector('.digi-btn').addEventListener('click', function() {
+  console.log('Digi-btn Clicked');
+  // Get the div element with the class 'digi-dimensions'
+  const digiDimensions = document.querySelector('.digi-dimensions');
+  
+  // Add the 'show' class to the div
+  digiDimensions.classList.add('show');
 });
 
 // Width x height x $
