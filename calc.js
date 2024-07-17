@@ -15,6 +15,7 @@ function addClassIfNotExists(element, className) {
 
 // Add click event listener for "digital_transfers_btn"
 digitalTransfersButton.addEventListener('click', () => {
+    console.log('Digital Transfers Button Clicked');
     // Remove "hide" class and add "show" class to "digital_transfers_sec"
     digitalTransfersSection.classList.remove('hide');
     addClassIfNotExists(digitalTransfersSection, 'show');
@@ -26,6 +27,7 @@ digitalTransfersButton.addEventListener('click', () => {
 
 // Add click event listener for "cadcut_transfers_btn"
 cadcutTransfersButton.addEventListener('click', () => {
+    console.log('Cadcut Transfers Button Clicked');
     // Add "hide" class and remove "show" class to "digital_transfers_sec"
     digitalTransfersSection.classList.add('hide');
     digitalTransfersSection.classList.remove('show');
@@ -34,6 +36,7 @@ cadcutTransfersButton.addEventListener('click', () => {
     cadcutTransfersSection.classList.remove('hide');
     addClassIfNotExists(cadcutTransfersSection, 'show');
 });
+
 // Get all buttons with class .filter-btn
 const filterButtons = document.querySelectorAll('.filter-btn');
 const digiButtons = document.querySelectorAll('.digi-btn');
@@ -41,6 +44,7 @@ const digiButtons = document.querySelectorAll('.digi-btn');
 // Add click event listener for .filter-btn
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
+        console.log('Filter Button Clicked');
         // Remove "active" class from other filter buttons
         filterButtons.forEach(btn => {
             if (btn !== button) {
@@ -55,6 +59,7 @@ filterButtons.forEach(button => {
 // Add click event listener for .digi-btn
 digiButtons.forEach(button => {
     button.addEventListener('click', () => {
+        console.log('Digi Button Clicked');
         // Remove "active" class from other digi buttons
         digiButtons.forEach(btn => {
             if (btn !== button) {
@@ -65,6 +70,7 @@ digiButtons.forEach(button => {
         button.classList.add('active');
     });
 });
+
 filterSelection("all")
 function filterSelection(c) {
   var x, i;
@@ -76,6 +82,7 @@ function filterSelection(c) {
     if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
   }
 }
+
 // Show filtered elements
 function w3AddClass(element, name) {
   var i, arr1, arr2;
@@ -87,6 +94,7 @@ function w3AddClass(element, name) {
     }
   }
 }
+
 // Hide elements that are not selected
 function w3RemoveClass(element, name) {
   var i, arr1, arr2;
@@ -99,26 +107,31 @@ function w3RemoveClass(element, name) {
   }
   element.className = arr1.join(" ");
 }
+
 // Add an event listener to the digi-btn
 document.querySelector('.digi-btn').addEventListener('click', function() {
+  console.log('Digi-btn Clicked');
   // Get the div element with the class 'digi-dimensions'
   const digiDimensions = document.querySelector('.digi-dimensions');
   
   // Add the 'show' class to the div
   digiDimensions.classList.add('show');
 });
+
 // Width x height x $
 const widthInput = document.querySelector('#width');
 const heightInput = document.querySelector('#height');
 
 // Fetch the price list
 async function fetchPriceList() {
+  console.log('Fetching Price List');
   const response = await fetch('/price_list.json');
   return await response.json();
 }
 
 // Modify the calculateSize function
 async function calculateSize() {
+  console.log('Calculating Size');
   let width = widthInput.value;
   let height = heightInput.value;
 
@@ -150,7 +163,10 @@ async function calculateSize() {
   // Calculate and log the prices
   Object.entries(quantityRanges).forEach(([quantityRange, price]) => {
       const totalPrice = value * parseFloat(price);
-      console.log(`For a quantity of ${quantityRange}, the total price would be ${totalPrice}`);
+      const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
+      const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
+      console.log(`Total Price for ${quantityRange}: ${dollarTotalPrice}`);
+      document.querySelector(`p#${quantityRange}_piece_price`).innerText = dollarTotalPrice;
   });
 }
 
