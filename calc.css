@@ -90,12 +90,13 @@ button.submit{
     min-width: 125px;
 }
 #width, #height, #quantityInput{
-    max-width:100px
+    margin-right:10px;
+    max-width:100px;
 }
 .digi-cost #perPieceQuantity p {
     font-weight: bold;
 }
-#totalPriceOutput span {
+#qtyPrice p:not(#totalPriceOutput) {
     font-weight: bold;
 }
 @media screen and (max-width:767px) {

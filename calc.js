@@ -1,19 +1,48 @@
+// Debounce function
+function debounce(func, delay) {
+  let debounceTimer;
+  return function() {
+    const context = this;
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+  }
+}
+
+// Get the input elements
+const widthInput = document.querySelector("#width");
+const heightInput = document.querySelector("#height");
+const quantityInput = document.querySelector("#quantityInput");
+
+// Add 'input' event listener to the input elements
+widthInput.addEventListener('input', debounce(async () => {
+  await calculateSize();
+  calculateTotalPrice();
+}, 300));
+
+heightInput.addEventListener('input', debounce(async () => {
+  await calculateSize();
+  calculateTotalPrice();
+}, 300));
+
+quantityInput.addEventListener('input', debounce(async () => {
+  await calculateSize();
+  calculateTotalPrice();
+}, 300));
+
 // Get the buttons
 const digitalTransfersButton = document.querySelector("#digital_transfers_btn");
 const cadcutTransfersButton = document.querySelector("#cadcut_transfers_btn");
-const calcSubmitButton = document.querySelector("#calcSubmit");
-const calcQtyButton = document.querySelector("#calcQtySubmit");
+// const calcSubmitButton = document.querySelector("#calcSubmit");
+// const calcQtyButton = document.querySelector("#calcQtySubmit");
 // Declare the constant variables to store the values
 let priceValue1;
 let priceValue25;
 let priceValue75;
 let priceValue250;
 let priceValue500;
-
 // Get the sections
-const digitalTransfersSection = document.querySelector(
-  "#digital_transfers_sec"
-);
+const digitalTransfersSection = document.querySelector("#digital_transfers_sec");
 const cadcutTransfersSection = document.querySelector("#cadcut_transfers_sec");
 
 // Function to add a class if it doesn't exist
@@ -156,8 +185,8 @@ document.querySelector(".digi-btn").addEventListener("click", function () {
 });
 
 // Width x height x $
-const widthInput = document.querySelector("#width");
-const heightInput = document.querySelector("#height");
+// const widthInput = document.querySelector("#width");
+// const heightInput = document.querySelector("#height");
 
 // Fetch the price list
 async function fetchPriceList() {
@@ -166,8 +195,8 @@ async function fetchPriceList() {
   return await response.json();
 }
 
-const quantityInput = document.querySelector("#quantityInput");
-const totalPriceOutput = document.querySelector("#totalPriceOutput");
+// const quantityInput = document.querySelector("#quantityInput");
+// const totalPriceOutput = document.querySelector("#totalPriceOutput");
 let quantity; // Declare quantity as a global variable
 let quantityRanges; // Declare quantityRanges as a global variable
 
@@ -242,8 +271,6 @@ async function calculateSize() {
   quantity = quantityInput.value; // Assign value to quantity
 }
 
-calcSubmitButton.addEventListener("click", calculateSize);
-
 function calculateTotalPrice() {
   // Get the quantity from the input
   quantity = document.querySelector("#quantityInput").value;
@@ -271,24 +298,8 @@ function calculateTotalPrice() {
 
   // Log the total price
   console.log(`Total Price: $${totalPrice.toFixed(2)}`);
-  let totalPriceSpan = document.createElement("span");
-  totalPriceSpan.innerText = "Total Price: ";
-  let totalPriceOutputElement = document.getElementById("totalPriceOutput");
-  
-  // Clear the totalPriceOutput element
-  totalPriceOutputElement.innerHTML = "";
-  
-  // Append the new output
-  totalPriceOutputElement.appendChild(totalPriceSpan);
-  totalPriceOutputElement.append(`${totalPrice.toFixed(2)}`);  
+  document.getElementById("totalPriceOutput").innerText = `$${totalPrice.toFixed(2)}`;
 }
-
-// Add the event listener for the calcQtyButton
-calcQtyButton.addEventListener("click", async () => {
-  await calculateSize();
-  calculateTotalPrice();
-});
-
 function resetCalculations() {
   // Reset the size and price calculations
   priceValue1 = null;

@@ -62,15 +62,15 @@
                             <label for="width">
                                 Width
                             </label>
-                            <input class="form-control" id="width" name="Width" type="number">
+                            <input min="0" class="form-control" id="width" name="Width" type="number">
                         </div>
                         <div class="align-items-center d-flex flex-row my-2">
                             <label for="height">
                                 Height
                             </label>
-                            <input class="form-control" id="height" name="Height" type="number">
+                            <input min="0" class="form-control" id="height" name="Height" type="number">
                         </div>
-                        <button class="my-2 submit" id="calcSubmit">SUBMIT</button>
+                        <!-- <button class="my-2 submit" id="calcSubmit">SUBMIT</button> -->
                     </div>
                 </div>
             </div>
@@ -111,8 +111,9 @@
                                 <label for="quantityInput">
                                     Quantity
                                 </label>
-                                <input class="form-control" id="quantityInput" name="Quantity" type="number">
-                                <button class="mx-2 submit" id="calcQtySubmit">SUBMIT</button>
+                                <input min="0" class="form-control" id="quantityInput" name="Quantity" type="number">
+                                <!-- <button class="mx-2 submit" id="calcQtySubmit">SUBMIT</button> -->
+                                <p class="mx-2">Total Price: </p>
                                 <p id="totalPriceOutput"></p>
                             </div>
                         </div>
