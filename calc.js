@@ -254,16 +254,16 @@ function calculateTotalPrice() {
 
   // Log the total price
   console.log(`Total Price: $${totalPrice.toFixed(2)}`);
-// Create a new span element
-let totalPriceSpan = document.createElement("span");
-// Set the text of the span element
-totalPriceSpan.innerText = "Total Price: ";
-// Get the totalPriceOutput element
-let totalPriceOutputElement = document.getElementById("totalPriceOutput");
-// Append the span element to the totalPriceOutput element
-totalPriceOutputElement.appendChild(totalPriceSpan);
-// Set the rest of the text
-totalPriceOutputElement.append(`${totalPrice.toFixed(2)}`);
+  let totalPriceSpan = document.createElement("span");
+  totalPriceSpan.innerText = "Total Price: ";
+  let totalPriceOutputElement = document.getElementById("totalPriceOutput");
+  
+  // Clear the totalPriceOutput element
+  totalPriceOutputElement.innerHTML = "";
+  
+  // Append the new output
+  totalPriceOutputElement.appendChild(totalPriceSpan);
+  totalPriceOutputElement.append(`${totalPrice.toFixed(2)}`);  
 }
 
 // Add the event listener for the calcQtyButton
