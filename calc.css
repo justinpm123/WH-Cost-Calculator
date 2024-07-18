@@ -5,8 +5,12 @@ h2 {
     background-color: #337ab7;
     color: #fff;
 }
-p {
-    margin-top:1rem;
+section{
+    width: 100%;
+}
+label {
+    font-weight: bold;
+    margin:auto 15px;
 }
 button:active {
     -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
@@ -14,14 +18,15 @@ button:active {
     box-shadow: inset 0px 0px 5px #c1c1c1;
     outline: none;
 }
+#calc_container p{
+    margin-bottom: 0.5rem;
+    margin-top:0.5rem;
+}
 .container {
     background-color: #fff;
     margin: auto;
     max-width: 1000px;
     text-align: center;
-}
-section{
-    width: 100%;
 }
 .row{
     margin-left:auto;
@@ -89,10 +94,7 @@ section{
     margin-left: 1rem;
     min-width: 125px;
 }
-.digi-dimensions label{
-    margin:auto 15px;
-}
-#width, #height{
+#width, #height, #quantityInput{
     max-width:100px
 }
 .digi-cost #perPieceQuantity p {
