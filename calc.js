@@ -71,6 +71,8 @@ filterButtons.forEach((button) => {
 digiButtons.forEach((button) => {
   button.addEventListener("click", () => {
     console.log("Digi Button Clicked");
+    // Reset function
+    resetCalculations();
     // Remove "active" class from other digi buttons
     digiButtons.forEach((btn) => {
       if (btn !== button) {
@@ -260,3 +262,19 @@ calcQtyButton.addEventListener("click", async () => {
   await calculateSize();
   calculateTotalPrice();
 });
+function resetCalculations() {
+  // Reset the size and price calculations
+  priceValue1 = null;
+  priceValue25 = null;
+  priceValue75 = null;
+  priceValue250 = null;
+  priceValue500 = null;
+
+  // Clear the displayed values
+  document.querySelector("#q1_piece_price").innerText = "";
+  document.querySelector("#q25_piece_price").innerText = "";
+  document.querySelector("#q75_piece_price").innerText = "";
+  document.querySelector("#q250_piece_price").innerText = "";
+  document.querySelector("#q500_piece_price").innerText = "";
+  document.getElementById("totalPriceOutput").innerText = "";
+}
