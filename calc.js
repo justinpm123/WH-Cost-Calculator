@@ -252,8 +252,8 @@ function calculateTotalPrice() {
 
   // Log the total price
   console.log(`Total Price: $${totalPrice.toFixed(2)}`);
-  document.getElementById("#totalPriceOutput").innerText =
-      "Total Price: $${totalPrice.toFixed(2)}";
+  document.getElementById("totalPriceOutput").innerText = `Total Price: ${totalPrice.toFixed(2)}`;
+
 }
 // Add the event listener for the calcQtyButton
 calcQtyButton.addEventListener("click", async () => {
