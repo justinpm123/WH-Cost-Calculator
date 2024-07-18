@@ -47,9 +47,26 @@ cadcutTransfersButton.addEventListener("click", () => {
   addClassIfNotExists(cadcutTransfersSection, "show");
 });
 
-// Get all buttons with class .filter-btn
+// Get all buttons each with their class
+const serviceButtons = document.querySelectorAll(".service-btn");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const digiButtons = document.querySelectorAll(".digi-btn");
+
+// Add click event listener for .service-btn
+serviceButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log("Service Button Clicked");
+    // Remove "active" class from other filter buttons
+    serviceButtons.forEach((btn) => {
+      if (btn !== button) {
+        btn.classList.remove("active");
+      }
+    });
+    // Add "active" class to the clicked filter button
+    button.classList.add("active");
+
+  });
+});
 
 // Add click event listener for .filter-btn
 filterButtons.forEach((button) => {

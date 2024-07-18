@@ -13,8 +13,8 @@
         <section class="col my-4" id="service_type">
             <h2 class="my-2 p-2 w-100 text-left">1. Service Type</h2>
             <div class="row justify-content-around">
-                <button id="digital_transfers_btn" name="Digital Transfers"></button>
-                <button id="cadcut_transfers_btn" name="Custom Cad-Cut"></button>
+                <button class="m-2 service-btn" id="digital_transfers_btn" name="Digital Transfers"></button>
+                <button class="m-2 service-btn" id="cadcut_transfers_btn" name="Custom Cad-Cut"></button>
             </div>
         </section>
         <section class="col my-4 hide" id="digital_transfers_sec">
@@ -55,56 +55,66 @@
             </div>
             <div class="digi-dimensions gap-1 m-auto">
                 <h2 class="my-2 p-2 w-100 text-left">3. Design Dimensions</h2>
-                <div class="card">
-                    <div class="card-body d-flex align-items-center">
-                        <p class="my-2">In Inches</p>
-                        <label for="width">
-                            Width
-                        </label>
-                        <input class="form-control" id="width" name="Width" type="number">
-                        <label for="height">
-                            Height
-                        </label>
-                        <input class="form-control" id="height" name="Height" type="number">
-                        <button id="calcSubmit">SUBMIT</button>
+                <div class="col">
+                    <div class="d-flex">
+                        <p class="align-items-center d-flex my-2">In Inches</p>
+                        <div class="align-items-center d-flex flex-row my-2">
+                            <label for="width">
+                                Width
+                            </label>
+                            <input class="form-control" id="width" name="Width" type="number">
+                        </div>
+                        <div class="align-items-center d-flex flex-row my-2">
+                            <label for="height">
+                                Height
+                            </label>
+                            <input class="form-control" id="height" name="Height" type="number">
+                        </div>
+                        <button class="my-2 submit" id="calcSubmit">SUBMIT</button>
                     </div>
                 </div>
             </div>
             <div class="digi-cost gap-1 m-auto">
                 <h2 class="my-2 p-2 w-100 text-left">4. Cost</h2>
                 <div class="row">
-                    <div id="perPieceQuantity" class="col-lg-2 col-md-3 col-sm-6">
-                    <div class="d-flex"><p class="my-2">1-24 pcs</p></div>
-                    <div class="d-flex"><p class="my-2">25-74 pcs</p></div>
-                    <div class="d-flex"><p class="my-2">75-249 pcs</p></div>
-                    <div class="d-flex"><p class="my-2">250-499 pcs</p></div>
-                    <div class="d-flex"><p class="my-2">500+ pcs</p></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="row">
+                            <div id="perPieceQuantity" class="col">
+                                <div class="d-flex"><p class="my-2">1-24 pcs</p></div>
+                                <div class="d-flex"><p class="my-2">25-74 pcs</p></div>
+                                <div class="d-flex"><p class="my-2">75-249 pcs</p></div>
+                                <div class="d-flex"><p class="my-2">250-499 pcs</p></div>
+                                <div class="d-flex"><p class="my-2">500+ pcs</p></div>
+                            </div>
+                            <div id="perPiecePrice" class="col">
+                                <div class="d-flex gap-1">
+                                    <p class="my-2" id="q1_piece_price"></p>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <p class="my-2" id="q25_piece_price"></p>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <p class="my-2" id="q75_piece_price"></p>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <p class="my-2" id="q250_piece_price"></p>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <p class="my-2" id="q500_piece_price"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="perPiecePrice" class="col-lg-2 col-md-3 col-sm-6 text-left">
-                        <div class="d-flex gap-1">
-                            <p class="my-2" id="q1_piece_price"></p>
-                        </div>
-                        <div class="d-flex gap-1">
-                            <p class="my-2" id="q25_piece_price"></p>
-                        </div>
-                        <div class="d-flex gap-1">
-                            <p class="my-2" id="q75_piece_price"></p>
-                        </div>
-                        <div class="d-flex gap-1">
-                            <p class="my-2" id="q250_piece_price"></p>
-                        </div>
-                        <div class="d-flex gap-1">
-                            <p class="my-2" id="q500_piece_price"></p>
-                        </div>
-                    </div>
-                    <div id="qtyPrice">
-                        <div class="card-body d-flex align-items-center">
-                            <label for="quantityInput">
-                                Quantity
-                            </label>
-                            <input class="form-control" id="quantityInput" name="Quantity" type="number">
-                            <button class="mx-2" id="calcQtySubmit">SUBMIT</button>
-                            <p id="totalPriceOutput"></p>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div id="qtyPrice">
+                            <div class="d-flex align-items-center">
+                                <label for="quantityInput">
+                                    Quantity
+                                </label>
+                                <input class="form-control" id="quantityInput" name="Quantity" type="number">
+                                <button class="mx-2 submit" id="calcQtySubmit">SUBMIT</button>
+                                <p id="totalPriceOutput"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
