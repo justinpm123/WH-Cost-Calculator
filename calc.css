@@ -88,7 +88,7 @@ button:active {
 .digi-dimensions{
     display:none;
 }
-#calcSubmit {
+#calcSubmit, #calcQtySubmit {
     border-radius: 3px;
     height: 2.5rem;
     margin-left: 1rem;
@@ -98,5 +98,8 @@ button:active {
     max-width:100px
 }
 .digi-cost #perPieceQuantity p {
+    font-weight: bold;
+}
+#totalPriceOutput span {
     font-weight: bold;
 }
