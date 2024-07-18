@@ -229,7 +229,7 @@ calcSubmitButton.addEventListener("click", calculateSize);
 
 function calculateTotalPrice() {
   // Get the quantity from the input
-  let quantity = document.querySelector("#quantityInput").value;
+  quantity = document.querySelector("#quantityInput").value;
 
   // Convert the price values from strings to numbers
   let price1 = parseFloat(priceValue1.replace("$", ""));
@@ -254,14 +254,24 @@ function calculateTotalPrice() {
 
   // Log the total price
   console.log(`Total Price: $${totalPrice.toFixed(2)}`);
-  document.getElementById("totalPriceOutput").innerHTML = `<span>Total Price:</span> ${totalPrice.toFixed(2)}`;
-
+// Create a new span element
+let totalPriceSpan = document.createElement("span");
+// Set the text of the span element
+totalPriceSpan.innerText = "Total Price: ";
+// Get the totalPriceOutput element
+let totalPriceOutputElement = document.getElementById("totalPriceOutput");
+// Append the span element to the totalPriceOutput element
+totalPriceOutputElement.appendChild(totalPriceSpan);
+// Set the rest of the text
+totalPriceOutputElement.append(`${totalPrice.toFixed(2)}`);
 }
+
 // Add the event listener for the calcQtyButton
 calcQtyButton.addEventListener("click", async () => {
   await calculateSize();
   calculateTotalPrice();
 });
+
 function resetCalculations() {
   // Reset the size and price calculations
   priceValue1 = null;
@@ -277,4 +287,9 @@ function resetCalculations() {
   document.querySelector("#q250_piece_price").innerText = "";
   document.querySelector("#q500_piece_price").innerText = "";
   document.getElementById("totalPriceOutput").innerText = "";
+
+    // Reset the input elements
+    document.getElementById("width").value = "";
+    document.getElementById("height").value = "";
+    document.getElementById("quantityInput").value = "";
 }
