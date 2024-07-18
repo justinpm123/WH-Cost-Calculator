@@ -85,12 +85,21 @@ const digiButtons = document.querySelectorAll(".digi-btn");
 serviceButtons.forEach((button) => {
   button.addEventListener("click", () => {
     console.log("Service Button Clicked");
-    // Remove "active" class from other filter buttons
-    serviceButtons.forEach((btn) => {
-      if (btn !== button) {
-        btn.classList.remove("active");
-      }
+
+    // Run the resetCalculations function
+    resetCalculations();
+    filterSelection("all")
+
+    // Remove "active" class from all filter buttons
+    filterButtons.forEach((btn) => {
+      btn.classList.remove("active");
     });
+
+    // Remove "active" class from all digi buttons
+    digiButtons.forEach((btn) => {
+      btn.classList.remove("active");
+    });
+
     // Add "active" class to the clicked filter button
     button.classList.add("active");
 
@@ -115,16 +124,16 @@ filterButtons.forEach((button) => {
 
 // Add click event listener for each .digi-btn
 digiButtons.forEach((button) => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", async () => {
     console.log("Digi Button Clicked");
-    // Reset function
-    resetCalculations();
+
     // Remove "active" class from other digi buttons
     digiButtons.forEach((btn) => {
       if (btn !== button) {
         btn.classList.remove("active");
       }
     });
+
     // Add "active" class to the clicked digi button
     button.classList.add("active");
 
@@ -134,8 +143,12 @@ digiButtons.forEach((button) => {
     // Add the 'show' class to the div
     digiDimensions.classList.add("show");
 
+    // Run the calculateSize function again to return a new set of prices
+    await calculateSize();
+    calculateTotalPrice();
   });
 });
+
 
 filterSelection("all");
 function filterSelection(c) {
@@ -316,8 +329,9 @@ function resetCalculations() {
   document.querySelector("#q500_piece_price").innerText = "";
   document.getElementById("totalPriceOutput").innerText = "";
 
-    // Reset the input elements
-    document.getElementById("width").value = "";
-    document.getElementById("height").value = "";
-    document.getElementById("quantityInput").value = "";
+  // Reset the input elements
+  document.getElementById("width").value = "";
+  document.getElementById("height").value = "";
+  document.getElementById("quantityInput").value = "";
+
 }
