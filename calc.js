@@ -10,22 +10,22 @@ function debounce(func, delay) {
 }
 
 // Get the input elements
-const widthInput = document.querySelector("#width");
-const heightInput = document.querySelector("#height");
-const quantityInput = document.querySelector("#quantityInput");
+const digiWidthInput = document.querySelector("#digiWidth");
+const digiHeightInput = document.querySelector("#digiHeight");
+const digiQuantityInput = document.querySelector("#digiQuantityInput");
 
 // Add 'input' event listener to the input elements
-widthInput.addEventListener('input', debounce(async () => {
+digiWidthInput.addEventListener('input', debounce(async () => {
   await calculateSize();
   calculateTotalPrice();
 }, 300));
 
-heightInput.addEventListener('input', debounce(async () => {
+digiHeightInput.addEventListener('input', debounce(async () => {
   await calculateSize();
   calculateTotalPrice();
 }, 300));
 
-quantityInput.addEventListener('input', debounce(async () => {
+digiQuantityInput.addEventListener('input', debounce(async () => {
   await calculateSize();
   calculateTotalPrice();
 }, 300));
@@ -36,11 +36,11 @@ const cadcutTransfersButton = document.querySelector("#cadcut_transfers_btn");
 // const calcSubmitButton = document.querySelector("#calcSubmit");
 // const calcQtyButton = document.querySelector("#calcQtySubmit");
 // Declare the constant variables to store the values
-let priceValue1;
-let priceValue25;
-let priceValue75;
-let priceValue250;
-let priceValue500;
+let digiPriceValue1;
+let digiPriceValue25;
+let digiPriceValue75;
+let digiPriceValue250;
+let digiPriceValue500;
 // Get the sections
 const digitalTransfersSection = document.querySelector("#digital_transfers_sec");
 const cadcutTransfersSection = document.querySelector("#cadcut_transfers_sec");
@@ -100,6 +100,13 @@ serviceButtons.forEach((button) => {
       btn.classList.remove("active");
     });
 
+    // Remove "active" class from all service buttons
+    serviceButtons.forEach((btn) => {
+      if (btn !== button) {
+        btn.classList.remove("active");
+      }
+    });
+
     // Add "active" class to the clicked filter button
     button.classList.add("active");
 
@@ -142,6 +149,12 @@ digiButtons.forEach((button) => {
 
     // Add the 'show' class to the div
     digiDimensions.classList.add("show");
+
+    // Get the div element with the class 'digi-dimensions'
+    const digiCost = document.querySelector(".digi-cost");
+
+    // Add the 'show' class to the div
+    digiCost.classList.add("show");
 
     // Run the calculateSize function again to return a new set of prices
     await calculateSize();
@@ -187,48 +200,32 @@ function w3RemoveClass(element, name) {
   element.className = arr1.join(" ");
 }
 
-// Add an event listener to the digi-btn
-document.querySelector(".digi-btn").addEventListener("click", function () {
-  console.log("Digi-btn Clicked");
-  // Get the div element with the class 'digi-dimensions'
-  const digiDimensions = document.querySelector(".digi-dimensions");
-
-  // Add the 'show' class to the div
-  digiDimensions.classList.add("show");
-});
-
-// Width x height x $
-// const widthInput = document.querySelector("#width");
-// const heightInput = document.querySelector("#height");
-
 // Fetch the price list
-async function fetchPriceList() {
+async function fetchDigiPriceList() {
   console.log("Fetching Price List");
   const response = await fetch("/price_list.json");
   return await response.json();
 }
 
-// const quantityInput = document.querySelector("#quantityInput");
-// const totalPriceOutput = document.querySelector("#totalPriceOutput");
-let quantity; // Declare quantity as a global variable
-let quantityRanges; // Declare quantityRanges as a global variable
+let digiQuantity; // Declare quantity as a global variable
+let digiQuantityRanges; // Declare quantityRanges as a global variable
 
 // Modify the calculateSize function
 async function calculateSize() {
   console.log("Calculating Size");
-  let width = widthInput.value;
-  let height = heightInput.value;
+  let width = digiWidthInput.value;
+  let height = digiHeightInput.value;
 
   // Multiply the width and height
-  let value = width * height;
-  console.log(value);
+  let digiValue = width * height;
+  console.log(digiValue);
 
   // Convert the result to a float and round to the nearest hundredth
-  value = Math.round(value);
-  console.log(value);
+  digiValue = Math.round(digiValue);
+  console.log(digiValue);
   
   // Fetch the price list
-  const priceList = await fetchPriceList();
+  const digiPriceList = await fetchDigiPriceList();
 
   // Get the active button
   const activeButton = document.querySelector(".active.digi-btn");
@@ -239,99 +236,99 @@ async function calculateSize() {
   );
 
   // Get the material from the price list
-  const material = priceList[materialClass];
+  const material = digiPriceList[materialClass];
 
   // Find the square inch range
-  const squareInchRanges = Object.keys(material).sort(
+  const digiSquareInchRanges = Object.keys(material).sort(
     (a, b) => parseInt(a) - parseInt(b)
   );
-  const squareInchRange =
-    squareInchRanges.find(range => value <= parseInt(range)) ||
-    squareInchRanges[squareInchRanges.length - 1];
+  const digiSquareInchRange =
+    digiSquareInchRanges.find(range => digiValue <= parseInt(range)) ||
+    digiSquareInchRanges[digiSquareInchRanges.length - 1];
 
   // Get the quantity ranges
-  const quantityRanges = material[squareInchRange];
+  const digiQuantityRanges = material[digiSquareInchRange];
 
   // Calculate and log the prices
-  Object.entries(quantityRanges).forEach(([quantityRange, price], index) => {
-    const totalPrice = value * parseFloat(price);
-    const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
-    const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
-    console.log(`Total Price for ${quantityRange}: ${dollarTotalPrice}`);
-    document.querySelector(`#q${quantityRange}_piece_price`).innerText =
-      dollarTotalPrice + " " + "each";
+  Object.entries(digiQuantityRanges).forEach(([digiQuantityRange, price], index) => {
+    const digiTotalPrice = digiValue * parseFloat(price);
+    const digiRoundedTotalPrice = Math.round(digiTotalPrice * 100) / 100;
+    const digiDollarTotalPrice = `$${digiRoundedTotalPrice.toFixed(2)}`;
+    console.log(`Total Price for ${digiQuantityRange}: ${digiDollarTotalPrice}`);
+    document.querySelector(`#digi_${digiQuantityRange}_piece_price`).innerText =
+      digiDollarTotalPrice + " " + "each";
 
     // Store the price values in the constant variables
     switch (index) {
       case 0:
-        priceValue1 = dollarTotalPrice;
+        digiPriceValue1 = digiDollarTotalPrice;
         break;
       case 1:
-        priceValue25 = dollarTotalPrice;
+        digiPriceValue25 = digiDollarTotalPrice;
         break;
       case 2:
-        priceValue75 = dollarTotalPrice;
+        digiPriceValue75 = digiDollarTotalPrice;
         break;
       case 3:
-        priceValue250 = dollarTotalPrice;
+        digiPriceValue250 = digiDollarTotalPrice;
         break;
       case 4:
-        priceValue500 = dollarTotalPrice;
+        digiPriceValue500 = digiDollarTotalPrice;
         break;
     }
   });
 
-  quantity = quantityInput.value; // Assign value to quantity
+  digiQuantity = digiQuantityInput.value; // Assign value to quantity
 }
 
 function calculateTotalPrice() {
   // Get the quantity from the input
-  quantity = document.querySelector("#quantityInput").value;
+  digiQuantity = document.querySelector("#digiQuantityInput").value;
 
   // Convert the price values from strings to numbers
-  let price1 = parseFloat(priceValue1.replace("$", ""));
-  let price25 = parseFloat(priceValue25.replace("$", ""));
-  let price75 = parseFloat(priceValue75.replace("$", ""));
-  let price250 = parseFloat(priceValue250.replace("$", ""));
-  let price500 = parseFloat(priceValue500.replace("$", ""));
+  let digiPrice1 = parseFloat(digiPriceValue1.replace("$", ""));
+  let digiPrice25 = parseFloat(digiPriceValue25.replace("$", ""));
+  let digiPrice75 = parseFloat(digiPriceValue75.replace("$", ""));
+  let digiPrice250 = parseFloat(digiPriceValue250.replace("$", ""));
+  let digiPrice500 = parseFloat(digiPriceValue500.replace("$", ""));
 
   // Calculate the total price based on the quantity
-  let totalPrice;
-  if (quantity <= 24) {
-    totalPrice = quantity * price1;
-  } else if (quantity <= 74) {
-    totalPrice = quantity * price25;
-  } else if (quantity <= 249) {
-    totalPrice = quantity * price75;
-  } else if (quantity <= 499) {
-    totalPrice = quantity * price250;
+  let digiTotalPrice;
+  if (digiQuantity <= 24) {
+    digiTotalPrice = digiQuantity * digiPrice1;
+  } else if (digiQuantity <= 74) {
+    digiTotalPrice = digiQuantity * digiPrice25;
+  } else if (digiQuantity <= 249) {
+    digiTotalPrice = digiQuantity * digiPrice75;
+  } else if (digiQuantity <= 499) {
+    digiTotalPrice = digiQuantity * digiPrice250;
   } else {
-    totalPrice = quantity * price500;
+    digiTotalPrice = digiQuantity * digiPrice500;
   }
 
   // Log the total price
-  console.log(`Total Price: $${totalPrice.toFixed(2)}`);
-  document.getElementById("totalPriceOutput").innerText = `$${totalPrice.toFixed(2)}`;
+  console.log(`Total Price: $${digiTotalPrice.toFixed(2)}`);
+  document.getElementById("digiTotalPriceOutput").innerText = `$${digiTotalPrice.toFixed(2)}`;
 }
 function resetCalculations() {
   // Reset the size and price calculations
-  priceValue1 = null;
-  priceValue25 = null;
-  priceValue75 = null;
-  priceValue250 = null;
-  priceValue500 = null;
+  digiPriceValue1 = null;
+  digiPriceValue25 = null;
+  digiPriceValue75 = null;
+  digiPriceValue250 = null;
+  digiPriceValue500 = null;
 
   // Clear the displayed values
-  document.querySelector("#q1_piece_price").innerText = "";
-  document.querySelector("#q25_piece_price").innerText = "";
-  document.querySelector("#q75_piece_price").innerText = "";
-  document.querySelector("#q250_piece_price").innerText = "";
-  document.querySelector("#q500_piece_price").innerText = "";
-  document.getElementById("totalPriceOutput").innerText = "";
+  document.querySelector("#digi_1_piece_price").innerText = "";
+  document.querySelector("#digi_25_piece_price").innerText = "";
+  document.querySelector("#digi_75_piece_price").innerText = "";
+  document.querySelector("#digi_250_piece_price").innerText = "";
+  document.querySelector("#digi_500_piece_price").innerText = "";
+  document.getElementById("digiTotalPriceOutput").innerText = "";
 
   // Reset the input elements
-  document.getElementById("width").value = "";
-  document.getElementById("height").value = "";
-  document.getElementById("quantityInput").value = "";
+  document.getElementById("digiWidth").value = "";
+  document.getElementById("digiHeight").value = "";
+  document.getElementById("digiQuantityInput").value = "";
 
 }

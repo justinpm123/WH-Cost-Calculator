@@ -60,18 +60,17 @@
                     <div class="d-flex">
                         <p class="align-items-center d-flex my-2">In Inches</p>
                         <div class="align-items-center d-flex flex-row my-2">
-                            <label for="width">
+                            <label for="digiWidth">
                                 Width
                             </label>
-                            <input min="0" class="form-control" id="width" name="Width" type="number">
+                            <input min="0" class="form-control" id="digiWidth" name="Width" type="number">
                         </div>
                         <div class="align-items-center d-flex flex-row my-2">
-                            <label for="height">
+                            <label for="digiHeight">
                                 Height
                             </label>
-                            <input min="0" class="form-control" id="height" name="Height" type="number">
+                            <input min="0" class="form-control" id="digiHeight" name="Height" type="number">
                         </div>
-                        <!-- <button class="my-2 submit" id="calcSubmit">SUBMIT</button> -->
                     </div>
                 </div>
             </div>
@@ -81,43 +80,42 @@
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <h3>Price Per Piece</h3>
                         <div class="row">
-                            <div id="perPieceQuantity" class="col">
+                            <div id="digiPieceQuantity" class="col qtyPrice">
                                 <div class="d-flex"><p class="my-2">1-24 pcs</p></div>
                                 <div class="d-flex"><p class="my-2">25-74 pcs</p></div>
                                 <div class="d-flex"><p class="my-2">75-249 pcs</p></div>
                                 <div class="d-flex"><p class="my-2">250-499 pcs</p></div>
                                 <div class="d-flex"><p class="my-2">500+ pcs</p></div>
                             </div>
-                            <div id="perPiecePrice" class="col">
+                            <div class="priceOutput" id="digiPiecePrice" class="col">
                                 <div class="d-flex gap-1">
-                                    <p class="my-2" id="q1_piece_price"></p>
+                                    <p class="my-2" id="digi_1_piece_price"></p>
                                 </div>
                                 <div class="d-flex gap-1">
-                                    <p class="my-2" id="q25_piece_price"></p>
+                                    <p class="my-2" id="digi_25_piece_price"></p>
                                 </div>
                                 <div class="d-flex gap-1">
-                                    <p class="my-2" id="q75_piece_price"></p>
+                                    <p class="my-2" id="digi_75_piece_price"></p>
                                 </div>
                                 <div class="d-flex gap-1">
-                                    <p class="my-2" id="q250_piece_price"></p>
+                                    <p class="my-2" id="digi_250_piece_price"></p>
                                 </div>
                                 <div class="d-flex gap-1">
-                                    <p class="my-2" id="q500_piece_price"></p>
+                                    <p class="my-2" id="digi_500_piece_price"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <h3>Total Price</h3>
-                        <div id="qtyPrice">
+                        <div class="qtyPrice" id="digiQtyPrice">
                             <div class="d-flex align-items-center">
-                                <label for="quantityInput">
+                                <label for="digiQuantityInput">
                                     Quantity
                                 </label>
-                                <input min="0" class="form-control" id="quantityInput" name="Quantity" type="number">
-                                <!-- <button class="mx-2 submit" id="calcQtySubmit">SUBMIT</button> -->
+                                <input min="0" class="form-control" id="digiQuantityInput" name="Quantity" type="number">
                                 <p class="mx-2">Total Price: </p>
-                                <p id="totalPriceOutput"></p>
+                                <p  class="priceOutput" id="digiTotalPriceOutput"></p>
                             </div>
                         </div>
                     </div>
@@ -125,7 +123,120 @@
             </div>
         </section>
         <section class="col my-4 hide" id="cadcut_transfers_sec">
-
+            <div id="num_colors">
+                <h2 class="my-2 p-2 w-100 text-left">2. Number of Colors</h2>
+                <div class="row justify-content-center">
+                    <button class="m-2 py-2 num-color-btn" id="num_colors_1" name="1 Color" value="1">1</button>
+                    <button class="m-2 py-2 num-color-btn" id="num_colors_2" name="2 Colors" value="2">2</button>
+                    <button class="m-2 py-2 num-color-btn" id="num_colors_3" name="3 Colors" value="3">3</button>
+                </div>
+            </div>
+                <div class="my-4 filter-btns">
+                    <h2 class="my-2 p-2 w-100 text-left">2. CadCut Transfer Product</h2>
+                    <h3 class="w-100">Filter by Material Compatibility</h3>
+                    <div class="row justify-content-center">
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('all')">All</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('cotton')">Best For Cotton</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('poly')">Best For Polyester</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('poly-cotton')">Best For Poly / Cotton Blend</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('sublimated')">Sublimated Polyester</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('lycra')">Lycra / Spandex</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('nylon')">Nylon</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('polyprop')">Polypropylene</button>
+                    <button class="filter-btn m-1 p-1" onclick="filterSelection('leather')">Leather</button>
+                </div>
+                <hr>
+                <div class="cad-btns gap-1 row my-4 mx-auto justify-content-center">
+                    <button class="cad-btn p-2 cotton poly-cotton poly standard">EasyWeed©</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly standard">SmashOn™ 2.0</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly standard">Thermo-Film©</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly standard">EasyWeed</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly polyprop standard">Express Print©</button>
+                    <button class="cad-btn p-2 lycra nylon leather specialty">SuperTEK© Opaque</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly lycra specialty">ColorPrint Soft Opaque</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly polyprop specialty">HI-5 Print Matte</button>
+                    <button class="cad-btn p-2 poly sublimated premium">Sublithin® Soft</button>
+                    <button class="cad-btn p-2 poly sublimated premium">SuperTEK© Sublitstop</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly lycra specialty">ColorPrint™ PU Matte</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly lycra specialty">ColorPrint™ PU Gloss</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly lycra nylon specialty">SuperTEK© Clear Gloss</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly lycra nylon specialty">SuperTEK© Clear Matte</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly lycra specialty">S-Print™</button>
+                    <button class="cad-btn p-2 premium">Eco-Sol Flock</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly premium">Soft Foam</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly premium">cadBrick™</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly premium">SparklePrint™</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly lycra specialty">CAD-COLOR® Soft Opaque II</button>
+                    <button class="cad-btn p-2 cotton poly-cotton poly specialty">CAD-COLOR® Chroma-Twill</button>
+                </div>
+                </div>
+                <div class="cad-dimensions gap-1 m-auto">
+                    <h2 class="my-2 p-2 w-100 text-left">3. Design Dimensions</h2>
+                    <div class="col">
+                        <div class="d-flex">
+                            <p class="align-items-center d-flex my-2">In Inches</p>
+                            <div class="align-items-center d-flex flex-row my-2">
+                                <label for="cadWidth">
+                                    Width
+                                </label>
+                                <input min="0" class="form-control" id="cadWidth" name="Width" type="number">
+                            </div>
+                            <div class="align-items-center d-flex flex-row my-2">
+                                <label for="cadHeight">
+                                    Height
+                                </label>
+                                <input min="0" class="form-control" id="cadHeight" name="Height" type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cad-cost gap-1 m-auto">
+                    <h2 class="my-2 p-2 w-100 text-left">4. Cost</h2>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <h3>Price Per Piece</h3>
+                            <div class="row">
+                                <div id="perPieceQuantity" class="col">
+                                    <div class="d-flex"><p class="my-2">1-24 pcs</p></div>
+                                    <div class="d-flex"><p class="my-2">25-74 pcs</p></div>
+                                    <div class="d-flex"><p class="my-2">75-249 pcs</p></div>
+                                    <div class="d-flex"><p class="my-2">250-499 pcs</p></div>
+                                    <div class="d-flex"><p class="my-2">500+ pcs</p></div>
+                                </div>
+                                <div class="priceOutput" id="cadPiecePrice" class="col">
+                                    <div class="d-flex gap-1">
+                                        <p class="my-2" id="q1_piece_price"></p>
+                                    </div>
+                                    <div class="d-flex gap-1">
+                                        <p class="my-2" id="q25_piece_price"></p>
+                                    </div>
+                                    <div class="d-flex gap-1">
+                                        <p class="my-2" id="q75_piece_price"></p>
+                                    </div>
+                                    <div class="d-flex gap-1">
+                                        <p class="my-2" id="q250_piece_price"></p>
+                                    </div>
+                                    <div class="d-flex gap-1">
+                                        <p class="my-2" id="q500_piece_price"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <h3>Total Price</h3>
+                            <div class="qtyPrice" id="cadQtyPrice">
+                                <div class="d-flex align-items-center">
+                                    <label for="cadQuantityInput">
+                                        Quantity
+                                    </label>
+                                    <input min="0" class="form-control" id="cadQuantityInput" name="Quantity" type="number">
+                                    <p class="mx-2">Total Price: </p>
+                                    <p class="priceOutput" id="cadTotalPrice"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </section>
     </div>
     <script src="calc.js"></script>
