@@ -109,11 +109,12 @@ button.submit{
 .digi-cost h3 {
     border-bottom: 1px solid #ccc;
 }
-.qtyPrice :not(.priceOutput) {
+.qtyPrice {
     font-weight: bold;
 }
 .priceOutput {
     color:darkgreen;
+    font-weight: 400;
 }
 /*CADCUT TRANSFER SECTION*/
 .num-color-btn{

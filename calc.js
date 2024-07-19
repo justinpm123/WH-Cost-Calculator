@@ -1,47 +1,5 @@
-// Debounce function
-function debounce(func, delay) {
-  let debounceTimer;
-  return function() {
-    const context = this;
-    const args = arguments;
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => func.apply(context, args), delay);
-  }
-}
-
-// Get the input elements
-const digiWidthInput = document.querySelector("#digiWidth");
-const digiHeightInput = document.querySelector("#digiHeight");
-const digiQuantityInput = document.querySelector("#digiQuantityInput");
-
-// Add 'input' event listener to the input elements
-digiWidthInput.addEventListener('input', debounce(async () => {
-  await calculateSize();
-  calculateTotalPrice();
-}, 300));
-
-digiHeightInput.addEventListener('input', debounce(async () => {
-  await calculateSize();
-  calculateTotalPrice();
-}, 300));
-
-digiQuantityInput.addEventListener('input', debounce(async () => {
-  await calculateSize();
-  calculateTotalPrice();
-}, 300));
-
-// Get the buttons
 const digitalTransfersButton = document.querySelector("#digital_transfers_btn");
 const cadcutTransfersButton = document.querySelector("#cadcut_transfers_btn");
-// const calcSubmitButton = document.querySelector("#calcSubmit");
-// const calcQtyButton = document.querySelector("#calcQtySubmit");
-// Declare the constant variables to store the values
-let digiPriceValue1;
-let digiPriceValue25;
-let digiPriceValue75;
-let digiPriceValue250;
-let digiPriceValue500;
-// Get the sections
 const digitalTransfersSection = document.querySelector("#digital_transfers_sec");
 const cadcutTransfersSection = document.querySelector("#cadcut_transfers_sec");
 
@@ -75,6 +33,45 @@ cadcutTransfersButton.addEventListener("click", () => {
   cadcutTransfersSection.classList.remove("hide");
   addClassIfNotExists(cadcutTransfersSection, "show");
 });
+
+// Debounce function
+function debounce(func, delay) {
+  let debounceTimer;
+  return function() {
+    const context = this;
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+  }
+}
+
+// Get the input elements
+const digiWidthInput = document.querySelector("#digiWidth");
+const digiHeightInput = document.querySelector("#digiHeight");
+const digiQuantityInput = document.querySelector("#digiQuantityInput");
+
+// Add 'input' event listener to the input elements
+digiWidthInput.addEventListener('input', debounce(async () => {
+  await calculateSize();
+  calculateTotalPrice();
+}, 300));
+
+digiHeightInput.addEventListener('input', debounce(async () => {
+  await calculateSize();
+  calculateTotalPrice();
+}, 300));
+
+digiQuantityInput.addEventListener('input', debounce(async () => {
+  await calculateSize();
+  calculateTotalPrice();
+}, 300));
+
+// Declare the constant variables to store the price values
+let digiPriceValue1;
+let digiPriceValue25;
+let digiPriceValue75;
+let digiPriceValue250;
+let digiPriceValue500;
 
 // Get all buttons each with their class
 const serviceButtons = document.querySelectorAll(".service-btn");
