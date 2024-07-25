@@ -1,10 +1,7 @@
-// This can be changed to 'cad' based on user's selection
-let currentSelection
-
-const digitalTransfersButton = document.querySelector("[data-service='digi']");
-const cadcutTransfersButton = document.querySelector("[data-service='cad']");
-const digitalTransfersSection = document.querySelector("[data-section='digi']");
-const cadcutTransfersSection = document.querySelector("[data-section='cad']");
+const digitalTransfersButton = document.querySelector("#digital_transfers_btn");
+const cadcutTransfersButton = document.querySelector("#cadcut_transfers_btn");
+const digitalTransfersSection = document.querySelector("#digital_transfers_sec");
+const cadcutTransfersSection = document.querySelector("#cadcut_transfers_sec");
 
 // Function to add a class if it doesn't exist
 function addClassIfNotExists(element, className) {
@@ -16,20 +13,25 @@ function addClassIfNotExists(element, className) {
 // Add click event listener for "digital_transfers_btn"
 digitalTransfersButton.addEventListener("click", () => {
   console.log("Digital Transfers Button Clicked");
-  currentSelection = 'digi';
-  // filterSelection("all");
+  // Remove "hide" class and add "show" class to "digital_transfers_sec"
+  digitalTransfersSection.classList.remove("hide");
   addClassIfNotExists(digitalTransfersSection, "show");
+
+  // Add "hide" class and remove "show" class from "cadcut_transfers_sec"
+  cadcutTransfersSection.classList.add("hide");
   cadcutTransfersSection.classList.remove("show");
 });
 
 // Add click event listener for "cadcut_transfers_btn"
 cadcutTransfersButton.addEventListener("click", () => {
   console.log("Cadcut Transfers Button Clicked");
-  currentSelection = 'cad';
-  // filterSelection("all");
-  addClassIfNotExists(cadcutTransfersSection, "show");
+  // Add "hide" class and remove "show" class to "digital_transfers_sec"
+  digitalTransfersSection.classList.add("hide");
   digitalTransfersSection.classList.remove("show");
 
+  // Remove "hide" class and add "show" class from "cadcut_transfers_sec"
+  cadcutTransfersSection.classList.remove("hide");
+  addClassIfNotExists(cadcutTransfersSection, "show");
 });
 
 // Debounce function
@@ -43,37 +45,38 @@ function debounce(func, delay) {
   }
 }
 
-// Select elements based on the data attribute
-const widthInput = document.querySelector(`[data-width='${currentSelection}']`);
-const heightInput = document.querySelector(`[data-height='${currentSelection}']`);
-const quantityInput = document.querySelector(`[data-quantity='${currentSelection}']`);
-// Get all buttons each with their data attribute
-let serviceButtons = document.querySelectorAll(`[data-service='${currentSelection}']`);
-let filterButtons = document.querySelectorAll(`[data-filter='${currentSelection}']`);
-let materialButtons = document.querySelectorAll(`[data-material='${currentSelection}']`);
+// Get the input elements
+const digiWidthInput = document.querySelector("#digiWidth");
+const digiHeightInput = document.querySelector("#digiHeight");
+const digiQuantityInput = document.querySelector("#digiQuantityInput");
 
 // Add 'input' event listener to the input elements
-widthInput.addEventListener('input', debounce(async () => {
+digiWidthInput.addEventListener('input', debounce(async () => {
   await calculateSize();
   calculateTotalPrice();
 }, 300));
 
-heightInput.addEventListener('input', debounce(async () => {
+digiHeightInput.addEventListener('input', debounce(async () => {
   await calculateSize();
   calculateTotalPrice();
 }, 300));
 
-quantityInput.addEventListener('input', debounce(async () => {
+digiQuantityInput.addEventListener('input', debounce(async () => {
   await calculateSize();
   calculateTotalPrice();
 }, 300));
 
 // Declare the constant variables to store the price values
-let priceValue1;
-let priceValue2;
-let priceValue3;
-let priceValue4;
-let priceValue5;
+let digiPriceValue1;
+let digiPriceValue25;
+let digiPriceValue75;
+let digiPriceValue250;
+let digiPriceValue500;
+
+// Get all buttons each with their class
+const serviceButtons = document.querySelectorAll(".service-btn");
+const filterButtons = document.querySelectorAll(".filter-btn");
+const digiButtons = document.querySelectorAll(".digi-btn");
 
 // Add click event listener for .service-btn
 serviceButtons.forEach((button) => {
@@ -90,7 +93,7 @@ serviceButtons.forEach((button) => {
     });
 
     // Remove "active" class from all digi buttons
-    materialButtons.forEach((btn) => {
+    digiButtons.forEach((btn) => {
       btn.classList.remove("active");
     });
 
@@ -124,12 +127,12 @@ filterButtons.forEach((button) => {
 });
 
 // Add click event listener for each .digi-btn
-materialButtons.forEach((button) => {
+digiButtons.forEach((button) => {
   button.addEventListener("click", async () => {
-    console.log("Material Button Clicked");
+    console.log("Digi Button Clicked");
 
     // Remove "active" class from other digi buttons
-    materialButtons.forEach((btn) => {
+    digiButtons.forEach((btn) => {
       if (btn !== button) {
         btn.classList.remove("active");
       }
@@ -156,10 +159,11 @@ materialButtons.forEach((button) => {
   });
 });
 
+
 filterSelection("all");
 function filterSelection(c) {
   var x, i;
-  x = materialButtons;
+  x = document.getElementsByClassName("digi-btn");
   if (c == "all") c = "";
   // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
   for (i = 0; i < x.length; i++) {
