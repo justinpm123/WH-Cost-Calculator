@@ -1,4 +1,5 @@
 let currentSelection = 'digi'; // Set a default value
+let priceValues = {};
 
 const digitalTransfersButton = document.querySelector("[data-service='digi']");
 const cadcutTransfersButton = document.querySelector("[data-service='cad']");
@@ -215,6 +216,12 @@ async function calculateSize() {
         break;
     }
   });
+  
+priceValues.priceValue1 = dollarTotalPrice;
+priceValues.priceValue2 = dollarTotalPrice;
+priceValues.priceValue3 = dollarTotalPrice;
+priceValues.priceValue4 = dollarTotalPrice;
+priceValues.priceValue5 = dollarTotalPrice;
 
 }
 else if (currentSelection === 'cad') {
@@ -271,49 +278,95 @@ else if (currentSelection === 'cad') {
 
   console.log(`Total price for ${quantityRange}: ${dollarTotalPrice}`);
   });
+  
+  priceValues.priceValue1 = dollarTotalPrice;
+  priceValues.priceValue2 = dollarTotalPrice;
+  priceValues.priceValue3 = dollarTotalPrice;
+  priceValues.priceValue4 = dollarTotalPrice;
+  priceValues.priceValue5 = dollarTotalPrice;
+}
 }
 
-}
+
 
 function calculateTotalPrice() {
   const calcQuantity = quantityInput.value;
 
-  let digiPrice1 = parseFloat(this.priceValue1.replace("$", ""));
-  let digiPrice25 = parseFloat(this.priceValue2.replace("$", ""));
-  let digiPrice75 = parseFloat(this.priceValue3.replace("$", ""));
-  let digiPrice250 = parseFloat(this.priceValue4.replace("$", ""));
-  let digiPrice500 = parseFloat(this.priceValue5.replace("$", ""));
+  let priceValue1 = parseFloat(priceValues.priceValue1.replace("$", ""));
+  let priceValue2 = parseFloat(priceValues.priceValue2.replace("$", ""));
+  let priceValue3 = parseFloat(priceValues.priceValue3.replace("$", ""));
+  let priceValue4 = parseFloat(priceValues.priceValue4.replace("$", ""));
+  let priceValue5 = parseFloat(priceValues.priceValue5.replace("$", ""));
+
+  // let priceValue1 = parseFloat(this.priceValue1.replace("$", ""));
+  // let priceValue2 = parseFloat(this.priceValue2.replace("$", ""));
+  // let priceValue3 = parseFloat(this.priceValue3.replace("$", ""));
+  // let priceValue4 = parseFloat(this.priceValue4.replace("$", ""));
+  // let priceValue5 = parseFloat(this.priceValue5.replace("$", ""));
 
   let totalPrice;
-  if (calcQuantity <= 24) {
-    totalPrice = calcQuantity * digiPrice1;
-  } else if (calcQuantity <= 74) {
-    totalPrice = calcQuantity * digiPrice25;
-  } else if (calcQuantity <= 249) {
-    totalPrice = calcQuantity * digiPrice75;
-  } else if (calcQuantity <= 499) {
-    totalPrice = calcQuantity * digiPrice250;
-  } else {
-    totalPrice = calcQuantity * digiPrice500;
+
+  if (currentSelection === 'digi') {
+    if (calcQuantity <= 24) {
+      totalPrice = calcQuantity * priceValue1;
+    } else if (calcQuantity <= 74) {
+      totalPrice = calcQuantity * priceValue2;
+    } else if (calcQuantity <= 249) {
+      totalPrice = calcQuantity * priceValue3;
+    } else if (calcQuantity <= 499) {
+      totalPrice = calcQuantity * priceValue4;
+    } else {
+      totalPrice = calcQuantity * priceValue5;
+    }
+    
+  console.log(`Total Price: $${totalPrice.toFixed(2)}`);
   }
 
+   else if (currentSelection === 'cad') {
+    // Replace this with the correct calculation logic for 'cad'
+    if (calcQuantity <= 11) {
+      totalPrice = priceValue1;
+    } else if (calcQuantity <= 47) {
+      totalPrice = priceValue2;
+    } else if (calcQuantity <= 95) {
+      totalPrice = priceValue3;
+    } else if (calcQuantity <= 249) {
+      totalPrice = priceValue4;
+    } else {
+      totalPrice = priceValue5;
+    }
+    
   console.log(`Total Price: $${totalPrice.toFixed(2)}`);
-  document.getElementById("totalPriceOutput").innerText = `$${totalPrice.toFixed(2)}`;
+  }
+
+document.querySelector(`[data-total-price-output='${currentSelection}']`).innerText = `$${totalPrice.toFixed(2)}`;
+
 }
 
-function resetCalculations() {
-  this.digiPriceValue1 = null;
-  this.digiPriceValue25 = null;
-  this.digiPriceValue75 = null;
-  this.digiPriceValue250 = null;
-  this.digiPriceValue500 = null;
 
-  document.querySelector("#digi_1_piece_price").innerText = "";
-  document.querySelector("#digi_25_piece_price").innerText = "";
-  document.querySelector("#digi_75_piece_price").innerText = "";
-  document.querySelector("#digi_250_piece_price").innerText = "";
-  document.querySelector("#digi_500_piece_price").innerText = "";
+function resetCalculations() {
+  this.priceValue1 = null;
+  this.priceValue2 = null;
+  this.priceValue3 = null;
+  this.priceValue4 = null;
+  this.priceValue5 = null;
+
+  
+  if (currentSelection === 'digi') {
+  document.querySelector("#digi_piece_price_1").innerText = "";
+  document.querySelector("#digi_piece_price_25").innerText = "";
+  document.querySelector("#digi_piece_price_75").innerText = "";
+  document.querySelector("#digi_piece_price_250").innerText = "";
+  document.querySelector("#digi_piece_price_500").innerText = "";
   document.getElementById("totalPriceOutput").innerText = "";
+} else if (currentSelection === 'cad') {
+  document.querySelector("#cad_piece_price_1").innerText = "";
+  document.querySelector("#cad_piece_price_12").innerText = "";
+  document.querySelector("#cad_piece_price_48").innerText = "";
+  document.querySelector("#cad_piece_price_96").innerText = "";
+  document.querySelector("#cad_piece_price_250").innerText = "";
+  document.getElementById("totalPriceOutput").innerText = "";
+}
 
   widthInput.value = "";
   heightInput.value = "";
