@@ -301,6 +301,7 @@ function calculateTotalPrice() {
 
   // Log the total price
   console.log(`Total Price: $${digiTotalPrice.toFixed(2)}`);
+  console.log(currentSelection);
   document.getElementById("digiTotalPriceOutput").innerText = `$${digiTotalPrice.toFixed(2)}`;
 }
 function resetCalculations() {

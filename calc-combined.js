@@ -200,28 +200,22 @@ async function calculateSize() {
 
     switch (index) {
       case 0:
-        this.priceValue1 = dollarTotalPrice;
+        priceValues.priceValue1 = dollarTotalPrice;
         break;
       case 1:
-        this.priceValue2 = dollarTotalPrice;
+        priceValues.priceValue2 = dollarTotalPrice;
         break;
       case 2:
-        this.priceValue3 = dollarTotalPrice;
+        priceValues.priceValue3 = dollarTotalPrice;
         break;
       case 3:
-        this.priceValue4 = dollarTotalPrice;
+        priceValues.priceValue4 = dollarTotalPrice;
         break;
       case 4:
-        this.priceValue5 = dollarTotalPrice;
+        priceValues.priceValue5 = dollarTotalPrice;
         break;
     }
   });
-  
-priceValues.priceValue1 = dollarTotalPrice;
-priceValues.priceValue2 = dollarTotalPrice;
-priceValues.priceValue3 = dollarTotalPrice;
-priceValues.priceValue4 = dollarTotalPrice;
-priceValues.priceValue5 = dollarTotalPrice;
 
 }
 else if (currentSelection === 'cad') {
@@ -251,7 +245,7 @@ else if (currentSelection === 'cad') {
   console.log('quantityRanges:', quantityRanges);
   
   Object.entries(quantityRanges).forEach(([quantityRange, price], index) => {
-    const totalPrice = price * quantityInput.value;
+    const totalPrice = price;
     const roundedTotalPrice = Math.round(totalPrice * 100) / 100;
     const dollarTotalPrice = `$${roundedTotalPrice.toFixed(2)}`;
     console.log(`Price for ${quantityRange}: ${price}`);
@@ -260,34 +254,26 @@ else if (currentSelection === 'cad') {
 
       switch (index) {
         case 0:
-          this.priceValue1 = dollarTotalPrice;
+          priceValues.priceValue1 = dollarTotalPrice;
           break;
         case 1:
-          this.priceValue2 = dollarTotalPrice;
+          priceValues.priceValue2 = dollarTotalPrice;
           break;
         case 2:
-          this.priceValue3 = dollarTotalPrice;
+          priceValues.priceValue3 = dollarTotalPrice;
           break;
         case 3:
-          this.priceValue4 = dollarTotalPrice;
+          priceValues.priceValue4 = dollarTotalPrice;
           break;
         case 4:
-          this.priceValue5 = dollarTotalPrice;
+          priceValues.priceValue5 = dollarTotalPrice;
           break;
       }
 
   console.log(`Total price for ${quantityRange}: ${dollarTotalPrice}`);
   });
-  
-  priceValues.priceValue1 = dollarTotalPrice;
-  priceValues.priceValue2 = dollarTotalPrice;
-  priceValues.priceValue3 = dollarTotalPrice;
-  priceValues.priceValue4 = dollarTotalPrice;
-  priceValues.priceValue5 = dollarTotalPrice;
 }
 }
-
-
 
 function calculateTotalPrice() {
   const calcQuantity = quantityInput.value;
@@ -298,14 +284,8 @@ function calculateTotalPrice() {
   let priceValue4 = parseFloat(priceValues.priceValue4.replace("$", ""));
   let priceValue5 = parseFloat(priceValues.priceValue5.replace("$", ""));
 
-  // let priceValue1 = parseFloat(this.priceValue1.replace("$", ""));
-  // let priceValue2 = parseFloat(this.priceValue2.replace("$", ""));
-  // let priceValue3 = parseFloat(this.priceValue3.replace("$", ""));
-  // let priceValue4 = parseFloat(this.priceValue4.replace("$", ""));
-  // let priceValue5 = parseFloat(this.priceValue5.replace("$", ""));
-
   let totalPrice;
-
+  
   if (currentSelection === 'digi') {
     if (calcQuantity <= 24) {
       totalPrice = calcQuantity * priceValue1;
@@ -323,22 +303,22 @@ function calculateTotalPrice() {
   }
 
    else if (currentSelection === 'cad') {
-    // Replace this with the correct calculation logic for 'cad'
     if (calcQuantity <= 11) {
-      totalPrice = priceValue1;
+      totalPrice = calcQuantity * priceValue1;
     } else if (calcQuantity <= 47) {
-      totalPrice = priceValue2;
+      totalPrice = calcQuantity * priceValue2;
     } else if (calcQuantity <= 95) {
-      totalPrice = priceValue3;
+      totalPrice = calcQuantity * priceValue3;
     } else if (calcQuantity <= 249) {
-      totalPrice = priceValue4;
+      totalPrice = calcQuantity * priceValue4;
     } else {
-      totalPrice = priceValue5;
+      totalPrice = calcQuantity * priceValue5;
     }
     
   console.log(`Total Price: $${totalPrice.toFixed(2)}`);
   }
 
+console.log(currentSelection);
 document.querySelector(`[data-total-price-output='${currentSelection}']`).innerText = `$${totalPrice.toFixed(2)}`;
 
 }
