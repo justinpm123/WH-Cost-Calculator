@@ -168,7 +168,7 @@ async function calculateSize() {
   let sizeValue = width * height;
   console.log(sizeValue);
   
-    if (currentSelection === 'digi') {
+if (currentSelection === 'digi') {
   
       // Custom rounding logic
   if (sizeValue % 1 <= 0.10) {
@@ -220,6 +220,13 @@ async function calculateSize() {
 }
 else if (currentSelection === 'cad') {
   console.log('currentSelection is cad');
+
+  const decimalPart = sizeValue % 1;
+    if (decimalPart < 0.0999) {
+      sizeValue = Math.floor(sizeValue);
+    } else {
+      sizeValue = Math.ceil(sizeValue);
+    }
   
   const material = priceList[materialClass];
   console.log('material:', material);
