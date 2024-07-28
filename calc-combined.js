@@ -1,5 +1,6 @@
 let currentSelection = 'digi'; // Set a default value
 let priceValues = {};
+let currentColorCount = 1;
 
 const digitalTransfersButton = document.querySelector("[data-service='digi']");
 const cadcutTransfersButton = document.querySelector("[data-service='cad']");
@@ -54,12 +55,29 @@ function resetActiveClasses() {
   activeElements.forEach(element => element.classList.remove('active'));
 }
 
+function handleColorButtonClick(colorCount) {
+  // Hide all material DIVs first
+  const allMaterialDivs = document.querySelectorAll('[data-material-color-count]');
+  allMaterialDivs.forEach(div => div.classList.remove('show'));
+
+  // Show the material DIVs up to and including the selected color count
+  for (let i = 1; i <= colorCount; i++) {
+    const selectedMaterialDivs = document.querySelectorAll(`[data-material-color-count="${i}"]`);
+    selectedMaterialDivs.forEach(div => div.classList.add('show'));
+  }
+
+  // Update the current color count
+  currentColorCount = colorCount;
+}
+
 function setupDimCostVisibility() {
   const dimensionsDivs = document.querySelectorAll('.dimensions');
   const costDivs = document.querySelectorAll('.cost');
 
   function updateVisibility() {
     const currentMaterialButtons = document.querySelectorAll(`[data-material='${currentSelection}']`);
+    console.log(currentMaterialButtons)
+    const currentMaterialDivs = document.querySelectorAll(`[data-material-color-count="${currentColorCount}"]`);
     console.log(currentMaterialButtons)
     const currentDimensionsDiv = document.querySelector(`.dimensions[data-dimension-type='${currentSelection}']`);
     const currentCostDiv = document.querySelector(`.cost[data-cost-type='${currentSelection}']`);
@@ -78,6 +96,26 @@ function setupDimCostVisibility() {
         
         const materialType = button.getAttribute('data-material-type');
         console.log(`Selected ${currentSelection} material type: ${materialType}`);
+        const materialClass = ["standard", "specialty", "premium"].find(cls =>
+          button.classList.contains(cls)
+        );
+        console.log(`Clicked material button. Type: ${materialType}, Class: ${materialClass}`);
+      });
+    });
+    currentMaterialDivs.forEach(div => {
+      const buttons = div.querySelectorAll(`[data-material='${currentSelection}']`);
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (currentDimensionsDiv) {
+            currentDimensionsDiv.classList.add('show');
+          }
+          if (currentCostDiv) {
+            currentCostDiv.classList.add('show');
+          }
+          
+          const materialType = button.getAttribute('data-material-type');
+          console.log(`Selected ${currentSelection} material type for color ${div.getAttribute('data-material-color-count')}: ${materialType}`);
+        });
       });
     });
   }
@@ -118,14 +156,14 @@ function filterSelection(filterType) {
     const buttonMaterialTypes = button.getAttribute('data-material-type').split(' ');
     if (filterType === "all" || buttonMaterialTypes.includes(filterType)) {
       button.classList.add("show");
-      console.log("Added 'show' class to:", button);
+      // console.log("Added 'show' class to:", button);
     } else {
       button.classList.remove("show");
-      console.log("Removed 'show' class from:", button);
+      // console.log("Removed 'show' class from:", button);
     }
   });
 
-  console.log("Buttons with 'show' class:", document.querySelectorAll(`[data-material='${currentSelection}'].show`));
+  // console.log("Buttons with 'show' class:", document.querySelectorAll(`[data-material='${currentSelection}'].show`));
 }
 
 function debounce(func, delay) {
@@ -142,7 +180,12 @@ async function fetchPriceList() {
   console.log(`Fetching ${currentSelection} Price List`);
   try {
     const response = await fetch(`/price_list_${currentSelection}.json`);
-    return await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Fetched price list data:", data);
+    return data;
   } catch (error) {
     console.error(`Error fetching ${currentSelection} price list:`, error);
     return null;
@@ -155,12 +198,14 @@ async function calculateSize() {
   const activeButton = document.querySelector(`.active[data-material='${currentSelection}']`);
   console.log(activeButton)
 
-  const priceList = await fetchPriceList();
-  if (!priceList) return;
-
   const materialClass = ["standard", "specialty", "premium"].find(cls =>
     activeButton.classList.contains(cls)
   );
+
+  console.log("Material class in calculateSize:", materialClass);
+
+  const priceList = await fetchPriceList();
+  if (!priceList) return;
   
   let width = widthInput.value;
   let height = heightInput.value;
@@ -405,28 +450,40 @@ document.addEventListener('DOMContentLoaded', () => {
     filterSelection('all');
     updateGlobalVariables();
     setupDimCostVisibility();
-
-    // Default the selection to the button with data-color-count='1' and give it the .active class
-    const colorButton = document.querySelector("[data-color-count='1']");
-    if (colorButton) {
-        colorButton.click();
+  
+    // Set up color buttons
+    const colorButtons = document.querySelectorAll('[data-color-count]');
+    colorButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const colorCount = parseInt(button.getAttribute('data-color-count'));
+        handleColorButtonClick(colorCount);
+        
+        // Remove active class from all color buttons
+        colorButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to the clicked button
+        button.classList.add('active');
+      });
+    });
+  
+    // Default to 1 color and set it as active
+    const defaultColorButton = document.querySelector("[data-color-count='1']");
+    if (defaultColorButton) {
+      defaultColorButton.classList.add('active');
+      handleColorButtonClick(1);
     }
-});
+  });
 
-console.log("Adding event listeners to input fields");
-widthInput.addEventListener('input', () => {
-  console.log("widthInput input event fired");
-  debounce(handleInputChange, 300);
-});
-heightInput.addEventListener('input', () => {
-  console.log("heightInput input event fired");
-  debounce(handleInputChange, 300);
-});
-quantityInput.addEventListener('input', () => {
-  console.log("quantityInput input event fired");
-  debounce(handleInputChange, 300);
-});
-  // widthInput.addEventListener('input', debounce(handleInputChange, 300));
-  // heightInput.addEventListener('input', debounce(handleInputChange, 300));
-  // quantityInput.addEventListener('input', debounce(handleInputChange, 300));
+  console.log("Adding event listeners to input fields");
+  widthInput.addEventListener('input', debounce(() => {
+    console.log("widthInput input event fired");
+    handleInputChange();
+  }, 300));
+  heightInput.addEventListener('input', debounce(() => {
+    console.log("heightInput input event fired");
+    handleInputChange();
+  }, 300));
+  quantityInput.addEventListener('input', debounce(() => {
+    console.log("widthInput input event fired");
+    handleInputChange();
+  }, 300));
 });
